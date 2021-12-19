@@ -1,0 +1,47 @@
+import groups
+import config
+import discord
+import asyncio
+from typing import List
+from discord.ext import commands
+
+class Purge(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @groups.moderation.command(guild_ids=config.test_servers)
+    async def purge(self, ctx: commands.Context, amount: int):
+        """Removes a spesified amount of messages"""
+        if not ctx.author.guild_permissions.manage_messages:
+            await ctx.respond(config.bot_permission_errormsg, ephemeral=True)
+            return
+        
+        if amount > 1000:
+            await ctx.respond(":no_entry: Whoa! Purge has a maximum of 1000 messages per command.", ephemeral=True)
+            return
+
+        await ctx.respond(":satellite: Starting message deletion...", ephemeral=True)
+
+        try:
+            chunks: List[str] = int(str((amount/25)).split(".")[0])
+            rmNum: List[str] = int(str((amount/25)).split(".")[1])
+            for n in range(chunks):
+                await ctx.edit(content=f":satellite: Purging cunk {n+1} of {chunks} ... | Deleteing")
+                await ctx.channel.purge(limit=25)
+                await ctx.edit(content=f":satellite: Purging cunk {n+1} of {chunks} ... | Idle (Cooldown)")
+                await asyncio.sleep(30)
+            if rmNum != 0:
+                await ctx.channel.purge(limit=rmNum)
+        except discord.Forbidden:
+            await ctx.edit(content=config.bot_permission_boterrormsg, ephemeral=True)
+            return
+        except discord.HTTPException:
+            await ctx.edit(content=config.bot_discorderror, ephemeral=True)
+            return
+        
+        await ctx.edit(
+            content=f":white_check_mark: Successfully purged {amount} messages from `{ctx.channel.name}`"
+        )
+
+def setup(bot):
+    bot.add_cog(Purge(bot))
