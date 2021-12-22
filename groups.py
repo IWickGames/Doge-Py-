@@ -1,21 +1,31 @@
-from discord.commands import SlashCommandGroup
+def MakeGroups(bot):
+    global tricks
+    global tasks
+    global moderation
+    global utilities
+    global fun
 
-tricks = SlashCommandGroup(
-    "tricks", "My trick set"
-)
+    tricks = bot.create_group(
+        name="tricks", 
+        description="My trick set"
+    )
 
-tasks = SlashCommandGroup(
-    "tasks", "Some automated tasks"
-)
+    tasks = bot.create_group(
+        name="tasks", 
+        description="Some automated tasks"
+    )
 
-moderation = SlashCommandGroup(
-    "moderation", "Only autherised people here"
-)
+    moderation = bot.create_group(
+        name="moderation", 
+        description="Only autherised people here"
+    )
 
-utilities = SlashCommandGroup(
-    "utilities", "Some usefull things"
-)
+    utilities = bot.create_group(
+        name="utilities", 
+        description="Some usefull things"
+    )
 
-fun = SlashCommandGroup(
-    "fun", "The fun things"
-)
+    fun = bot.create_group(
+        name="fun", 
+        description="The fun things"
+    )

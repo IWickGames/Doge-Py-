@@ -13,7 +13,7 @@ class Emote(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @groups.tricks.command(guild_ids=config.test_servers)
+    @groups.tricks.command()
     async def emote(self, ctx: commands.Context, emoji: str):
         """Gives you information about an custom emote"""
         if not emoji.startswith("<"):

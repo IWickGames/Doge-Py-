@@ -9,7 +9,7 @@ class Ban(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @groups.moderation.command(guild_ids=config.test_servers)
+    @groups.moderation.command()
     async def ban(self, ctx: commands.Context, user: discord.User, reason: Optional[str]):
         """Ban a user from the server"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)

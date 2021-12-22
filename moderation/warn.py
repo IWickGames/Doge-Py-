@@ -8,7 +8,7 @@ class Warn(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.moderation.command(guild_ids=config.test_servers)
+    @groups.moderation.command()
     async def warn(self, ctx: commands.Context, user: discord.User, reason: str):
         """Warns a user on your server via a direct message"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)

@@ -7,7 +7,7 @@ class Coinflip(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @groups.fun.command(guild_ids=config.test_servers)
+    @groups.fun.command()
     async def coinflip(self, ctx: commands.Context):
         """Flip a coin"""
         side: str = ["Head", "Tails"][random.randint(0, 1)]

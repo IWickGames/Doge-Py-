@@ -7,7 +7,7 @@ class Poll(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @groups.utilities.command(guild_ids=config.test_servers)
+    @groups.utilities.command()
     async def poll(self, ctx: commands.Context, message: str):
         """Create a simple thumbs up or down poll"""
         emb = discord.Embed(

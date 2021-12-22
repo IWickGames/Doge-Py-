@@ -7,7 +7,7 @@ class Userinfo(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @groups.utilities.command(guild_ids=config.test_servers)
+    @groups.utilities.command()
     async def userinfo(self, ctx: commands.Context, user: discord.Member):
         """Get information about a user"""
         member: discord.Member = await ctx.guild.fetch_member(ctx.author.id)

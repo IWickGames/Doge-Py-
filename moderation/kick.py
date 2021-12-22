@@ -9,7 +9,7 @@ class Kick(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.moderation.command(guild_ids=config.test_servers)
+    @groups.moderation.command()
     async def kick(self, ctx: commands.Context, user: discord.User, reason=Optional[str]):
         """Kicks a user from the server"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)

@@ -6,7 +6,7 @@ class Fetch(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @groups.tricks.command(guild_ids=config.test_servers)
+    @groups.tricks.command()
     async def fetch(self, ctx: commands.Context):
         """Let me fetch a bone for you"""
         await ctx.respond(f":grin: Found it! Here {ctx.author.mention} :bone:")

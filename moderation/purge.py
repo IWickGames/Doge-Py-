@@ -9,7 +9,7 @@ class Purge(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.moderation.command(guild_ids=config.test_servers)
+    @groups.moderation.command()
     async def purge(self, ctx: commands.Context, amount: int):
         """Removes a spesified amount of messages"""
         if not ctx.author.guild_permissions.manage_messages:

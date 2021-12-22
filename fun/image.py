@@ -10,7 +10,7 @@ class Image(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @groups.fun.command(guild_ids=config.test_servers)
+    @groups.fun.command()
     async def image(self, ctx: commands.Context, query: str):
         """Lookup an image from the internet"""
         await ctx.respond(":satellite: Looking up images...")
