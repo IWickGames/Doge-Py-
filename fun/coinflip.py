@@ -7,7 +7,7 @@ class Coinflip(commands.Cog):
         self.bot = bot
     
     @groups.fun.command()
-    async def coinflip(self, ctx: commands.Context):
+    async def coinflip(ctx: commands.Context):
         """Flip a coin"""
         side: str = ["Head", "Tails"][random.randint(0, 1)]
         await ctx.respond(f":coin: {ctx.author.mention} you got: `{side}`")

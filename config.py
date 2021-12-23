@@ -1,3 +1,7 @@
+def PassBot(b):
+    global bot
+    bot = b
+
 token = open("token.env").read()
 
 test_servers = [735935481950503043, 673399675818213385]

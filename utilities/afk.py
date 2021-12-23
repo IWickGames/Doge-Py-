@@ -8,7 +8,7 @@ class Afk(commands.Cog):
         self.bot = bot
     
     @groups.utilities.command()
-    async def afk(self, ctx: commands.Context):
+    async def afk(ctx: commands.Context):
         """Toggle your AFK status"""
         try:
             member: discord.Member = await ctx.guild.fetch_member(ctx.author.id)

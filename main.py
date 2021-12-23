@@ -14,6 +14,7 @@ async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="fetch"))
     print(f"{bot.user.name}#{bot.user.discriminator} is now online")
 
+config.PassBot(bot)
 groups.MakeGroups(bot)
 
 for directory in config.cog_directorys:

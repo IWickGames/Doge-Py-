@@ -10,7 +10,7 @@ class Kick(commands.Cog):
         self.bot = bot
 
     @groups.moderation.command()
-    async def kick(self, ctx: commands.Context, user: discord.User, reason=Optional[str]):
+    async def kick(ctx: commands.Context, user: discord.User, reason=Optional[str]):
         """Kicks a user from the server"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)
         if not ctx.author.guild_permissions.ban_members or higharchy:

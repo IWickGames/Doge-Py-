@@ -8,7 +8,7 @@ class Star(commands.Cog):
         self.bot = bot
     
     @groups.utilities.command()
-    async def star(self, ctx: commands.Context, message_id: str):
+    async def star(ctx: commands.Context, message_id: str):
         """Add a message to the servers star board"""
         if not ctx.author.guild_permissions.manage_messages:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)

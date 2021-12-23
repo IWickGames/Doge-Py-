@@ -9,7 +9,7 @@ class Meme(commands.Cog):
         self.bot = bot
     
     @groups.fun.command()
-    async def meme(self, ctx: commands.Context):
+    async def meme(ctx: commands.Context):
         """Get an extra dank meme from the interwebs"""
         async with aiohttp.ClientSession() as sess:
             async with sess.get(config.meme_api) as req:

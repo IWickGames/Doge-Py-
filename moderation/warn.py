@@ -9,7 +9,7 @@ class Warn(commands.Cog):
         self.bot = bot
 
     @groups.moderation.command()
-    async def warn(self, ctx: commands.Context, user: discord.User, reason: str):
+    async def warn(ctx: commands.Context, user: discord.User, reason: str):
         """Warns a user on your server via a direct message"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)
         if not ctx.author.guild_permissions.ban_members or higharchy:

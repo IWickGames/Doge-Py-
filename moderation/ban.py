@@ -10,7 +10,7 @@ class Ban(commands.Cog):
         self.bot = bot
     
     @groups.moderation.command()
-    async def ban(self, ctx: commands.Context, user: discord.User, reason: Optional[str]):
+    async def ban(ctx: commands.Context, user: discord.User, reason: Optional[str]):
         """Ban a user from the server"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)
         if not ctx.author.guild_permissions.ban_members or higharchy:

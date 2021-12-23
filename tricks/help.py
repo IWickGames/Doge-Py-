@@ -60,7 +60,7 @@ class Help(commands.Cog):
         self.bot = bot
     
     @groups.tricks.command()
-    async def help(self, ctx: commands.Context, category: Optional[str]):
+    async def help(ctx: commands.Context, category: Optional[str]):
         """Display the help message"""
         
         if category:

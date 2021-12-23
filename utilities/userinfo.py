@@ -8,7 +8,7 @@ class Userinfo(commands.Cog):
         self.bot = bot
     
     @groups.utilities.command()
-    async def userinfo(self, ctx: commands.Context, user: discord.Member):
+    async def userinfo(ctx: commands.Context, user: discord.Member):
         """Get information about a user"""
         member: discord.Member = await ctx.guild.fetch_member(ctx.author.id)
         emb = discord.Embed(

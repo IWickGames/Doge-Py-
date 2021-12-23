@@ -6,7 +6,7 @@ class Pet(commands.Cog):
         self.bot = bot
     
     @groups.tricks.command()
-    async def pet(self, ctx: commands.Context):
+    async def pet(ctx: commands.Context):
         """Tell me I am doing a good job!"""
         await ctx.respond(f":dog2: Awww! Thanks {ctx.author.mention} :yum:")
 

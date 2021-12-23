@@ -10,7 +10,7 @@ class Purge(commands.Cog):
         self.bot = bot
 
     @groups.moderation.command()
-    async def purge(self, ctx: commands.Context, amount: int):
+    async def purge(ctx: commands.Context, amount: int):
         """Removes a spesified amount of messages"""
         if not ctx.author.guild_permissions.manage_messages:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)

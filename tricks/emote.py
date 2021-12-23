@@ -14,7 +14,7 @@ class Emote(commands.Cog):
         self.bot = bot
     
     @groups.tricks.command()
-    async def emote(self, ctx: commands.Context, emoji: str):
+    async def emote(ctx: commands.Context, emoji: str):
         """Gives you information about an custom emote"""
         if not emoji.startswith("<"):
             await ctx.respond(
