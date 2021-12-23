@@ -9,8 +9,9 @@ async def HelpTrics():
         title="Tricks",
         color=config.embed_color,
     )
-    emb.add_field(name="Help", value="Display help page", inline=True)
-    emb.add_field(name="Pet", value="Tell me I am doing a good job :yum:", inline=True)
+    emb.add_field(name="help", value="Display help page", inline=True)
+    emb.add_field(name="ping", value="Get the bots ping to Discord API", inline=True)
+    emb.add_field(name="pet", value="Tell me I am doing a good job :yum:", inline=True)
     emb.add_field(name="fetch", value="Fetch this bone -> :bone:", inline=True)
     emb.add_field(name="emote {emoji:Emoji}", value="Give you information on a emote", inline=True)
     return emb
@@ -42,8 +43,8 @@ async def HelpUtilities():
     )
     emb.add_field(name="afk", value="Toggles your afk status", inline=True);
     emb.add_field(name="poll {message:String}", value="Creates a poll message and adds reactions", inline=True);
-    emb.add_field(name="userinfo {(Optional) user:Mention}", value="Sends information about a user", inline=True);
     emb.add_field(name="star {messageID:String}", value="Adds the message to the servers star channel (requires ManageMessages permission)", inline=True);
+    emb.add_field(name="userinfo {(Optional) user:Mention}", value="Sends information about a user", inline=True);
     return emb
 
 async def HelpFun():
@@ -68,7 +69,7 @@ class Help(commands.Cog):
             choices=["tricks", "tasks", "moderation", "utilities", "fun"]
         )
     ):
-        """Display the help message"""
+        """Display a help message"""
         
         if category:
             if category == "tricks":
