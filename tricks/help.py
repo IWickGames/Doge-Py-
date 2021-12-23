@@ -10,6 +10,7 @@ async def HelpTrics():
         color=config.embed_color,
     )
     emb.add_field(name="help", value="Display help page", inline=True)
+    emb.add_field(name="about", value="Displays information about the bot", inline=True)
     emb.add_field(name="ping", value="Get the bots ping to Discord API", inline=True)
     emb.add_field(name="pet", value="Tell me I am doing a good job :yum:", inline=True)
     emb.add_field(name="fetch", value="Fetch this bone -> :bone:", inline=True)
