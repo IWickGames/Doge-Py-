@@ -81,7 +81,7 @@ class Help(commands.Cog):
                 return
 
             if category == "moderation":
-                await ctx.repsond(embed=await HelpModeration())
+                await ctx.respond(embed=await HelpModeration())
                 return
             
             if category == "utilities":
