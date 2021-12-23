@@ -1,5 +1,4 @@
 import groups
-import config
 import random
 from discord.ext import commands
 

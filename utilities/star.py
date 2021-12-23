@@ -1,8 +1,7 @@
-from typing import List
-from discord.ext import commands
 import config
 import groups
 import discord
+from discord.ext import commands
 
 class Star(commands.Cog):
     def __init__(self, bot):

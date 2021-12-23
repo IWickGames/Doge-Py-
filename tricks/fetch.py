@@ -1,6 +1,5 @@
-from discord.ext import commands
-import config
 import groups
+from discord.ext import commands
 
 class Fetch(commands.Cog):
     def __init__(self, bot):

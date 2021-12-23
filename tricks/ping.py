@@ -1,5 +1,4 @@
 import groups
-import config
 from discord.ext import commands
 
 class Ping(commands.Cog):

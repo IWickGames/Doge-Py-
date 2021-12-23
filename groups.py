@@ -10,11 +10,13 @@ def MakeGroups(bot):
         description="My trick set"
     )
 
+    """
     tasks = bot.create_group(
         name="tasks", 
         description="Some automated tasks"
     )
-
+    """
+    
     moderation = bot.create_group(
         name="moderation", 
         description="Only autherised people here"
