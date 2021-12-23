@@ -2,13 +2,17 @@ import groups
 import config
 import discord
 from discord.ext import commands
+from discord.commands.commands import Option
 
 class Poll(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
     @groups.utilities.command()
-    async def poll(ctx: commands.Context, message: str):
+    async def poll(
+        ctx: commands.Context, 
+        message: Option(str, description="The poll message", required=True)
+    ):
         """Create a simple thumbs up or down poll"""
         emb = discord.Embed(
             title=message,

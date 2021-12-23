@@ -2,14 +2,21 @@ import groups
 import config
 import discord
 from discord.ext import commands
+from discord.commands.commands import Option
 
 class Userinfo(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
     @groups.utilities.command()
-    async def userinfo(ctx: commands.Context, user: discord.Member):
+    async def userinfo(
+        ctx: commands.Context, 
+        user: Option(discord.Member, description="The user to view information on", default=None)
+    ):
         """Get information about a user"""
+        if not user:
+            user = ctx.author
+        
         member: discord.Member = await ctx.guild.fetch_member(ctx.author.id)
         emb = discord.Embed(
             title=f"{user.name}#{user.discriminator} ({user.id})",

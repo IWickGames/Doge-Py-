@@ -4,13 +4,17 @@ import discord
 import asyncio
 from typing import List
 from discord.ext import commands
+from discord.commands.commands import Option
 
 class Purge(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @groups.moderation.command()
-    async def purge(ctx: commands.Context, amount: int):
+    async def purge(
+        ctx: commands.Context, 
+        amount: Option(int, description="The amount of messages to purge", required=True)
+    ):
         """Removes a spesified amount of messages"""
         if not ctx.author.guild_permissions.manage_messages:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)

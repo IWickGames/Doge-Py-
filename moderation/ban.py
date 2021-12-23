@@ -1,16 +1,20 @@
 import config
 import groups
 import discord
-from typing import Optional
 from discord.ext import commands
 from utility import CheckHigharchy
+from discord.commands.commands import Option
 
 class Ban(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
     @groups.moderation.command()
-    async def ban(ctx: commands.Context, user: discord.User, reason: Optional[str]):
+    async def ban(
+        ctx: commands.Context, 
+        user: Option(discord.User, description="User to ban", required=True), 
+        reason: Option(str, description="The reason for the ban", required=False)
+    ):
         """Ban a user from the server"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)
         if not ctx.author.guild_permissions.ban_members or higharchy:

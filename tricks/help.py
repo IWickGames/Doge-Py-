@@ -1,8 +1,8 @@
 import config
 import groups
 import discord
-from typing import Optional
 from discord.ext import commands
+from discord.commands.commands import Option
 
 async def HelpTrics():
     emb = discord.Embed(
@@ -60,7 +60,14 @@ class Help(commands.Cog):
         self.bot = bot
     
     @groups.tricks.command()
-    async def help(ctx: commands.Context, category: Optional[str]):
+    async def help(
+        ctx: commands.Context, 
+        category: Option(
+            str, 
+            description="Select a category to get help on", 
+            choices=["tricks", "tasks", "moderation", "utilities", "fun"]
+        )
+    ):
         """Display the help message"""
         
         if category:

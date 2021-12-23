@@ -2,13 +2,17 @@ import config
 import groups
 import discord
 from discord.ext import commands
+from discord.commands.commands import Option
 
 class Star(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
     @groups.utilities.command()
-    async def star(ctx: commands.Context, message_id: str):
+    async def star(
+        ctx: commands.Context, 
+        message_id: Option(str, description="The ID of the message you would like to star", required=True)
+    ):
         """Add a message to the servers star board"""
         if not ctx.author.guild_permissions.manage_messages:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)

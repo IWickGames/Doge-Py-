@@ -2,6 +2,7 @@ import groups
 import config
 import discord
 from discord.ext import commands
+from discord.commands.commands import Option
 
 def GetEmoteName(em):
     return em.split(':')[1]
@@ -14,7 +15,10 @@ class Emote(commands.Cog):
         self.bot = bot
     
     @groups.tricks.command()
-    async def emote(ctx: commands.Context, emoji: str):
+    async def emote(
+        ctx: commands.Context, 
+        emoji: Option(str, description="The emoji send in a string", required=True)
+    ):
         """Gives you information about an custom emote"""
         if not emoji.startswith("<"):
             await ctx.respond(
