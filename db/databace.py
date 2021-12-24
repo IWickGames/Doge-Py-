@@ -1,3 +1,4 @@
+import os
 import json
 
 global queue
@@ -13,8 +14,11 @@ async def ReadKey(key):
 
 def Load():
     global queue
-    with open("bot.db", "r") as f:
-        queue = json.loads(f.read())
+    if os.path.exists("bot.db"):
+        with open("bot.db", "r") as f:
+            queue = json.loads(f.read())
+    else:
+        queue = {}
 
 def Flush():
     global queue
