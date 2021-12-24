@@ -33,8 +33,9 @@ async def HelpModeration():
     )
     emb.add_field(name="purge {amount:Number<1000}", value="Purges amount messages from a channel (requires ManageMessages permission)", inline=True);
     emb.add_field(name="warn {user:Mention} {reason:String}", value="Warns a user for an infraction (requires KickMemebers permission)", inline=True);
-    emb.add_field(name="ban {user:Mention} {reason:String}", value="Bans a user from the guild (requires BanMembers permission)", inline=True);
+    emb.add_field(name="timeout {user:Mention} {time:Choice} {reason:String}", value="Timeouts a user for a certain amount of time (required ModerateMembers permission)", inline=True)
     emb.add_field(name="kick {user:Mention} {reason:String}", value="Kicks a user from the guild (requires KickMembers permission)", inline=True);
+    emb.add_field(name="ban {user:Mention} {reason:String}", value="Bans a user from the guild (requires BanMembers permission)", inline=True);
     return emb
 
 async def HelpUtilities():
