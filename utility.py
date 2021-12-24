@@ -40,3 +40,33 @@ async def GetImages(search) -> List[Image]:
         images.append(im)
     
     return images
+
+async def EncodeDrawCode(codeRaw):
+        length, width = codeRaw.split(":", 1)[0].lower().split("x")
+        code = codeRaw.split(":", 1)[1]
+
+        if len(list(code)) > 2040:
+            return None
+
+        message = ""
+        addLen = 0
+        addLines = 0
+        for num in list(code):
+            if num == "1":
+                message += ":blue_square:"
+            elif num == "0":
+                message += ":black_large_square:"
+            else:
+                return None
+
+            if addLen == int(length) - 1:
+                message += "\n"
+                addLen = 0
+                addLines += 1
+            else:
+                addLen += 1
+
+            if addLines > int(width):
+                return None
+
+        return message

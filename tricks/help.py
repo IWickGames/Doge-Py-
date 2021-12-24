@@ -54,6 +54,8 @@ async def HelpFun():
         title="Fun",
         color=config.embed_color
     )
+    emb.add_field(name="draw {code:String}", value="Draws the code onto the screen using emotes", inline=True)
+    emb.add_field(name="image {query:String}", value="Lookup a image online", inline=True)
     emb.add_field(name="coinflip", value="Flip a coin", inline=True)
     emb.add_field(name="meme", value="Get a dank meme", inline=True)
     return emb
