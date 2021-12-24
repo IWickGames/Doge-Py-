@@ -30,7 +30,7 @@ async def databace_flush():
 
 def Load():
     global queue
-    if os.path.exists("bot.db"):
+    if os.path.exists("db/bot.db"):
         with open("bot.db", "r") as f:
             queue = json.loads(f.read())
     else:
@@ -39,6 +39,6 @@ def Load():
 def Flush():
     global queue
     print("[Databace] Starting flush operation...")
-    with open("bot.db", "w") as f:
+    with open("db/bot.db", "w") as f:
         f.write(json.dumps(queue, indent=4))
     print("[Databace] Flush operation completed")
