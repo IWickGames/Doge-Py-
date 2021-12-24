@@ -25,4 +25,4 @@ def Flush():
     print("[Databace] Starting flush operation (DO NOT FORCE KILL THE PROCESS)...")
     with open("bot.db", "w") as f:
         f.write(json.dumps(queue, indent=4))
-    print("[Databace] Flush operation completed, exiting...")
+    print("[Databace] Flush operation completed")

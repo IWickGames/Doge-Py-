@@ -4,6 +4,7 @@ import groups
 import config
 import discord
 import db.databace
+from discord.ext import tasks
 
 from sys import path
 path.append(os.path.realpath("."))
@@ -14,6 +15,10 @@ bot = discord.Bot()
 async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="fetch"))
     print(f"{bot.user.name}#{bot.user.discriminator} is now online")
+
+@tasks.loop(seconds=30.0)
+async def databace_flush():
+    db.databace.Flush()
 
 config.PassBot(bot)
 groups.MakeGroups(bot)
