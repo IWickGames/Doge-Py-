@@ -1,6 +1,7 @@
 import config
 import groups
 import discord
+import db.databace
 from discord.ext import commands
 from utility import CheckHigharchy
 from discord.commands.commands import Option
@@ -20,6 +21,18 @@ class Ban(commands.Cog):
         if not ctx.author.guild_permissions.ban_members or higharchy:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)
             return
+
+        warningsdb = await db.databace.ReadKey(f"punishments.{user.id}.{ctx.guild.id}")
+        if not warningsdb:
+            warningsdb = []
+        warningsdb.append(
+            {
+                "type": "ban",
+                "reason": reason,
+                "issuer": f"{ctx.author.name}#{ctx.author.discriminator}"
+            }
+        )
+        await db.databace.WriteKey(f"punishments.{user.id}.{ctx.guild.id}", warningsdb)
 
         try:
             await ctx.guild.ban(user, reason=reason)

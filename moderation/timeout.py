@@ -2,6 +2,7 @@ import groups
 import config
 import discord
 import datetime
+import db.databace
 from discord.ext import commands
 from utility import CheckHigharchy
 from discord.commands.commands import Option
@@ -48,6 +49,18 @@ class Timeout(commands.Cog):
             util = now + datetime.timedelta(weeks=1)
         else:
             util = now + datetime.timedelta(minutes=5)
+
+        warningsdb = await db.databace.ReadKey(f"punishments.{user.id}.{ctx.guild.id}")
+        if not warningsdb:
+            warningsdb = []
+        warningsdb.append(
+            {
+                "type": "timeout",
+                "reason": reason,
+                "issuer": f"{ctx.author.name}#{ctx.author.discriminator}"
+            }
+        )
+        await db.databace.WriteKey(f"punishments.{user.id}.{ctx.guild.id}", warningsdb)
 
         try:
             await user.timeout(until=util, reason=reason)

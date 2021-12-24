@@ -1,6 +1,7 @@
 import groups
 import config
 import discord
+import db.databace
 from discord.ext import commands
 from utility import CheckHigharchy
 from discord.commands.commands import Option
@@ -30,10 +31,23 @@ class Warn(commands.Cog):
 
         emb.add_field(name="Reason", value=reason, inline=True)
         emb.add_field(name="Issuer", value=f"{ctx.author.name}", inline=True)
+
+        warningsdb = await db.databace.ReadKey(f"punishments.{user.id}.{ctx.guild.id}")
+        if not warningsdb:
+            warningsdb = []
+        warningsdb.append(
+            {
+                "type": "warning",
+                "reason": reason,
+                "issuer": f"{ctx.author.name}#{ctx.author.discriminator}"
+            }
+        )
+        await db.databace.WriteKey(f"punishments.{user.id}.{ctx.guild.id}", warningsdb)
+
         try:
             await user.send(embed=emb)
         except discord.Forbidden:
-            await ctx.respond(config.bot_permission_boterrormsg, ephemeral=True)
+            await ctx.respond(":mailbox_with_mail: The spesified user has direct messaging disabled", ephemeral=True)
             return
         except discord.HTTPException:
             await ctx.respond(config.bot_discorderror, ephemeral=True)
