@@ -1,3 +1,4 @@
+from typing_extensions import Required
 import groups
 import config
 import discord
@@ -12,7 +13,7 @@ class Punishments(commands.Cog):
     @groups.moderation.command()
     async def punishments(
         ctx: commands.Context,
-        user: Option(discord.User)
+        user: Option(discord.Use, description="The user you want to lookup", required=True)
     ):
         """List a users past punishments"""
 
