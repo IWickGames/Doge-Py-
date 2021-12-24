@@ -16,6 +16,10 @@ class Punishments(commands.Cog):
     ):
         """List a users past punishments"""
 
+        if user.bot:
+            await ctx.respond(config.bot_interaction_boterror, ephemeral=True)
+            return
+
         db = await ReadKey(f"punishments.{user.id}.{ctx.guild.id}")
         if not db:
             await ctx.respond(":pencil: This user has no record of any punishments", ephemeral=True)

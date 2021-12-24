@@ -21,6 +21,11 @@ class Warn(commands.Cog):
         if not ctx.author.guild_permissions.ban_members or higharchy:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)
             return
+
+        if user.bot:
+            await ctx.respond(config.bot_interaction_boterror, ephemeral=True)
+            return
+
         emb = discord.Embed(
             title=f"Warning from `{ctx.guild.name}` ({ctx.guild.id})",
             color=config.embed_color,
