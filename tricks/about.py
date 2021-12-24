@@ -13,7 +13,7 @@ class About(commands.Cog):
         emb = discord.Embed(
             title="About Doge",
             description="""Thank you for using Doge bot by IWick Development, 
-            Doge is a common useage discord bot to attempt to fill all your needs.
+            Doge is a common usage discord bot to attempt to fill all your needs.
             We attempt to fit as many features as possibe into one single bot to hopefully 
             cut down on the large amount of bots that people have to add to get a functional 
             Discord server""".replace("\n", " "),
