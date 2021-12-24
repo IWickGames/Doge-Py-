@@ -9,9 +9,18 @@ async def WriteKey(key, value):
     global queue
     queue[key] = value
 
+async def AppendKey(key, value):
+    global queue
+    db = await ReadKey(key)
+    if not db:
+        db = []
+    db.append(value)
+    await WriteKey(key, db)
+
 async def ReadKey(key):
     global queue
     return queue.get(key)
+
 
 async def databace_flush():
     Load()

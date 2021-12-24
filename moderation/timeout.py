@@ -50,17 +50,14 @@ class Timeout(commands.Cog):
         else:
             util = now + datetime.timedelta(minutes=5)
 
-        warningsdb = await db.databace.ReadKey(f"punishments.{user.id}.{ctx.guild.id}")
-        if not warningsdb:
-            warningsdb = []
-        warningsdb.append(
+        await db.databace.AppendKey(
+            f"punishments.{user.id}.{ctx.guild.id}", 
             {
-                "type": "timeout",
+                "type": "Timeout",
                 "reason": reason,
                 "issuer": f"{ctx.author.name}#{ctx.author.discriminator}"
             }
         )
-        await db.databace.WriteKey(f"punishments.{user.id}.{ctx.guild.id}", warningsdb)
 
         try:
             await user.timeout(until=util, reason=reason)

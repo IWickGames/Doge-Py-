@@ -32,17 +32,14 @@ class Warn(commands.Cog):
         emb.add_field(name="Reason", value=reason, inline=True)
         emb.add_field(name="Issuer", value=f"{ctx.author.name}", inline=True)
 
-        warningsdb = await db.databace.ReadKey(f"punishments.{user.id}.{ctx.guild.id}")
-        if not warningsdb:
-            warningsdb = []
-        warningsdb.append(
+        await db.databace.AppendKey(
+            f"punishments.{user.id}.{ctx.guild.id}", 
             {
-                "type": "warning",
+                "type": "Warning",
                 "reason": reason,
                 "issuer": f"{ctx.author.name}#{ctx.author.discriminator}"
             }
         )
-        await db.databace.WriteKey(f"punishments.{user.id}.{ctx.guild.id}", warningsdb)
 
         try:
             await user.send(embed=emb)

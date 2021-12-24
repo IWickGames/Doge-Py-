@@ -22,17 +22,14 @@ class Ban(commands.Cog):
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)
             return
 
-        warningsdb = await db.databace.ReadKey(f"punishments.{user.id}.{ctx.guild.id}")
-        if not warningsdb:
-            warningsdb = []
-        warningsdb.append(
+        await db.databace.AppendKey(
+            f"punishments.{user.id}.{ctx.guild.id}", 
             {
-                "type": "ban",
+                "type": "Ban",
                 "reason": reason,
                 "issuer": f"{ctx.author.name}#{ctx.author.discriminator}"
             }
         )
-        await db.databace.WriteKey(f"punishments.{user.id}.{ctx.guild.id}", warningsdb)
 
         try:
             await ctx.guild.ban(user, reason=reason)
