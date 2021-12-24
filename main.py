@@ -2,9 +2,9 @@ import os
 
 import groups
 import config
+import asyncio
 import discord
 import db.databace
-from discord.ext import tasks
 
 from sys import path
 path.append(os.path.realpath("."))
@@ -16,9 +16,10 @@ async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="fetch"))
     print(f"{bot.user.name}#{bot.user.discriminator} is now online")
 
-@tasks.loop(seconds=30.0)
 async def databace_flush():
-    db.databace.Flush()
+    while True:
+        await asyncio.sleep(30)
+        db.databace.Flush()
 
 config.PassBot(bot)
 groups.MakeGroups(bot)
@@ -32,6 +33,7 @@ for directory in config.cog_directorys:
 db.databace.Load()
 loop = bot.loop
 try:
+    loop.create_task(databace_flush())
     loop.run_until_complete(bot.start(config.token, reconnect=True))
 except:
     loop.run_until_complete(bot.close())
