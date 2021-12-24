@@ -26,6 +26,11 @@ class Purge(commands.Cog):
 
         await ctx.respond(":satellite: Starting message deletion...", ephemeral=True)
 
+        if amount < 25:
+            await ctx.channel.purge(limit=amount)
+            await ctx.edit(content=f":white_check_mark: Successfully purged {amount} messages from `{ctx.channel.name}`")
+            return
+
         try:
             chunks: List[str] = int(str((amount/25)).split(".")[0])
             rmNum: List[str] = int(str((amount/25)).split(".")[1])

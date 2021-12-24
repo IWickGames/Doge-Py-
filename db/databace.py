@@ -1,5 +1,6 @@
 import os
 import json
+import config
 import asyncio
 
 global queue
@@ -30,8 +31,8 @@ async def databace_flush():
 
 def Load():
     global queue
-    if os.path.exists("db/bot.db"):
-        with open("bot.db", "r") as f:
+    if os.path.exists(config.databace_file):
+        with open(config.databace_file, "r") as f:
             queue = json.loads(f.read())
     else:
         queue = {}
@@ -39,6 +40,6 @@ def Load():
 def Flush():
     global queue
     print("[Databace] Starting flush operation...")
-    with open("db/bot.db", "w") as f:
+    with open(config.databace_file, "w") as f:
         f.write(json.dumps(queue, indent=4))
     print("[Databace] Flush operation completed")
