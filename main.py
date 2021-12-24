@@ -16,11 +16,6 @@ async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="fetch"))
     print(f"{bot.user.name}#{bot.user.discriminator} is now online")
 
-async def databace_flush():
-    while True:
-        await asyncio.sleep(30)
-        db.databace.Flush()
-
 config.PassBot(bot)
 groups.MakeGroups(bot)
 
@@ -33,7 +28,7 @@ for directory in config.cog_directorys:
 db.databace.Load()
 loop = bot.loop
 try:
-    loop.create_task(databace_flush())
+    loop.create_task(db.databace.databace_flush())
     loop.run_until_complete(bot.start(config.token, reconnect=True))
 except:
     loop.run_until_complete(bot.close())
