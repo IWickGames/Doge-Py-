@@ -17,9 +17,10 @@ class Timeout(commands.Cog):
         time: Option(
             str, 
             description="The amount of time to mute the user for", 
-            required=True,
-            choices=["1 Minute", "5 Minutes", "10 Minutes", "1 Hour", "1 Day", "1 Week"]),
-        reason: Option(str, description="The reason for the timeout", default="No reason spesified")
+            choices=["1 Minute", "5 Minutes", "10 Minutes", "1 Hour", "1 Day", "1 Week"],
+            required=True
+        ),
+        reason: Option(str, description="The reason for the timeout", default="No reason spesified", required=False)
     ):
         """Timeout a user for a certain amount of time"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)
@@ -27,10 +28,14 @@ class Timeout(commands.Cog):
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)
             return
 
+        if user.timed_out:
+            await ctx.respond(f":hourglass_flowing_sand: The user `{user.name}#{user.discriminator}` is already in timeout", ephemeral=True)
+            return
+
         now = datetime.datetime.now()
 
         if time == "1 Minute":
-            util = now + datetime.timedelta(minutes=1)
+            util = now + datetime.timedelta(seconds=60)
         elif time == "5 Minutes":
             util = now + datetime.timedelta(minutes=5)
         elif time == "10 Minutes":
@@ -44,9 +49,14 @@ class Timeout(commands.Cog):
         else:
             util = now + datetime.timedelta(minutes=5)
 
-        await user.timeout(until=util, reason=reason)
+        try:
+            await user.timeout(until=util, reason=reason)
+        except discord.Forbidden:
+            await ctx.respond(config.bot_permission_boterrormsg, ephemeral=True)
+            return
+
         await ctx.respond(
-            f":white_check_mark: The user {user.name}#{user.discriminator} was successfully timeouted until {discord.utils.format_dt(util)}"
+            f":white_check_mark: The user `{user.name}#{user.discriminator}` was successfully timeouted until {discord.utils.format_dt(util)}"
         )
 
 def setup(bot):

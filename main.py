@@ -3,6 +3,7 @@ import os
 import groups
 import config
 import discord
+from db.databace import Flush
 
 from sys import path
 path.append(os.path.realpath("."))
@@ -23,4 +24,10 @@ for directory in config.cog_directorys:
             print("Loading " + cog)
             bot.load_extension(f'{directory}.{cog[:-3]}')
 
-bot.run(config.token)
+loop = bot.loop
+try:
+    loop.run_until_complete(bot.start(config.token, reconnect=True))
+except:
+    loop.run_until_complete(bot.close())
+finally:
+    Flush()
