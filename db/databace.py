@@ -14,6 +14,7 @@ async def ReadKey(key):
     return queue.get(key)
 
 async def databace_flush():
+    Load()
     while True:
         await asyncio.sleep(30)
         Flush()

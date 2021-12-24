@@ -2,7 +2,6 @@ import os
 
 import groups
 import config
-import asyncio
 import discord
 import db.databace
 
@@ -25,12 +24,10 @@ for directory in config.cog_directorys:
             print("Loading " + cog)
             bot.load_extension(f'{directory}.{cog[:-3]}')
 
-db.databace.Load()
-loop = bot.loop
 try:
-    loop.create_task(db.databace.databace_flush())
-    loop.run_until_complete(bot.start(config.token, reconnect=True))
+    bot.loop.create_task(db.databace.databace_flush())
+    bot.loop.run_until_complete(bot.start(config.token, reconnect=True))
 except:
-    loop.run_until_complete(bot.close())
+    bot.loop.run_until_complete(bot.close())
 finally:
     db.databace.Flush()
