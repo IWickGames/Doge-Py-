@@ -4,13 +4,14 @@ import discord
 from discord.ext import commands
 from discord.commands.commands import Option
 
+
 class Poll(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    
+
     @groups.utilities.command()
     async def poll(
-        ctx: commands.Context, 
+        ctx: commands.Context,
         message: Option(str, description="The poll message", required=True)
     ):
         """Create a simple thumbs up or down poll"""
@@ -19,11 +20,13 @@ class Poll(commands.Cog):
             color=config.embed_color,
             description="Place your vote below with :thumbsup: or :thumbsdown:"
         )
-        emb.set_footer(text=f"Poll started by {ctx.author.name}#{ctx.author.discriminator}")
+        emb.set_footer(
+            text=f"Poll started by {ctx.author.name}#{ctx.author.discriminator}")
         msg: discord.Message = await ctx.send(embed=emb)
         await msg.add_reaction("👍")
         await msg.add_reaction("👎")
         await ctx.respond(":white_check_mark: Poll created successfully", ephemeral=True)
+
 
 def setup(bot):
     bot.add_cog(Poll(bot))

@@ -9,6 +9,7 @@ path.append(os.path.realpath("."))
 
 bot = discord.Bot()
 
+
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="fetch"))

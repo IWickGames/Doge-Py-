@@ -3,10 +3,11 @@ import config
 import discord
 from discord.ext import commands
 
+
 class About(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    
+
     @groups.tricks.command()
     async def about(ctx: commands.Context):
         """Display information about this bot"""
@@ -22,16 +23,17 @@ class About(commands.Cog):
         emb.set_thumbnail(url=config.bot.user.avatar.url)
 
         emb.add_field(
-            name="Add Me!", 
-            value="[Click here to add me to your server](https://discord.com/api/oauth2/authorize?client_id=869706426975670312&permissions=8&scope=applications.commands%20bot)", 
+            name="Add Me!",
+            value="[Click here to add me to your server](https://discord.com/api/oauth2/authorize?client_id=869706426975670312&permissions=8&scope=applications.commands%20bot)",
             inline=True
         )
         emb.add_field(
-            name="GitHub", 
-            value="[Click here for my GitHub page](https://github.com/IWickGames/Doge-Py-)", 
+            name="GitHub",
+            value="[Click here for my GitHub page](https://github.com/IWickGames/Doge-Py-)",
             inline=True
         )
         await ctx.respond(embed=emb)
+
 
 def setup(bot):
     bot.add_cog(About(bot))

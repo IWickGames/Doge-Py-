@@ -6,15 +6,17 @@ from discord.ext import commands
 from utility import CheckHigharchy
 from discord.commands.commands import Option
 
+
 class Ban(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    
+
     @groups.moderation.command()
     async def ban(
-        ctx: commands.Context, 
-        user: Option(discord.User, description="User to ban", required=True), 
-        reason: Option(str, description="The reason for the ban", required=False)
+        ctx: commands.Context,
+        user: Option(discord.User, description="User to ban", required=True),
+        reason: Option(
+            str, description="The reason for the ban", required=False)
     ):
         """Ban a user from the server"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)
@@ -23,7 +25,7 @@ class Ban(commands.Cog):
             return
 
         await db.databace.AppendKey(
-            f"punishments.{user.id}.{ctx.guild.id}", 
+            f"punishments.{user.id}.{ctx.guild.id}",
             {
                 "type": "Ban",
                 "reason": reason,
@@ -39,8 +41,9 @@ class Ban(commands.Cog):
         except discord.HTTPException:
             await ctx.respond(config.bot_discorderror, ephemeral=True)
             return
-        
+
         await ctx.respond(f":hammer: Successfully banned {user.name}#{user.discriminator}", ephemeral=True)
+
 
 def setup(bot):
     bot.add_cog(Ban(bot))

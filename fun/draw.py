@@ -5,24 +5,26 @@ from discord.ext import commands
 from utility import EncodeDrawCode
 from discord.commands.commands import Option
 
+
 class Draw(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    
+
     @groups.fun.command()
     async def draw(
         ctx: commands.Context,
-        code: Option(str, description="Width x Hight : 1 = Blue | 0 = Black", required=True)
+        code: Option(
+            str, description="Width x Hight : 1 = Blue | 0 = Black", required=True)
     ):
         """Draws the spesified code to the screen using emotes"""
         if not "x" in code.lower() or not ":" in code:
             await ctx.respond(":anger: Grrrr, invalid draw code format", ephemeral=True)
             return
-        
+
         message = await EncodeDrawCode(code)
         if not message:
-            await ctx.respond(":anger: Grrrr, Failed to encode message, it may be out of bounds " 
-            "of your dimensions or has invalid characters", ephemeral=True)
+            await ctx.respond(":anger: Grrrr, Failed to encode message, it may be out of bounds "
+                              "of your dimensions or has invalid characters", ephemeral=True)
             return
 
         emb = discord.Embed(
@@ -32,6 +34,7 @@ class Draw(commands.Cog):
         )
         emb.add_field(name="Code", value=code)
         await ctx.respond(embed=emb)
+
 
 def setup(bot):
     bot.add_cog(Draw(bot))

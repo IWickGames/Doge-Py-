@@ -6,15 +6,17 @@ from discord.ext import commands
 from utility import CheckHigharchy
 from discord.commands.commands import Option
 
+
 class Warn(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @groups.moderation.command()
     async def warn(
-        ctx: commands.Context, 
-        user: Option(discord.User, description="The user to warn", required=True), 
-        reason: Option(str, description="The reasion to warn the user", required=True)
+        ctx: commands.Context,
+        user: Option(discord.User, description="The user to warn", required=True),
+        reason: Option(
+            str, description="The reasion to warn the user", required=True)
     ):
         """Warns a user on your server via a direct message"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)
@@ -38,7 +40,7 @@ class Warn(commands.Cog):
         emb.add_field(name="Issuer", value=f"{ctx.author.name}", inline=True)
 
         await db.databace.AppendKey(
-            f"punishments.{user.id}.{ctx.guild.id}", 
+            f"punishments.{user.id}.{ctx.guild.id}",
             {
                 "type": "Warning",
                 "reason": reason,
@@ -56,6 +58,7 @@ class Warn(commands.Cog):
             return
 
         await ctx.respond(f":white_check_mark: Warned {user.name}#{user.discriminator} successfully")
+
 
 def setup(bot):
     bot.add_cog(Warn(bot))

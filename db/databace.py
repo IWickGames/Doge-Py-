@@ -6,9 +6,11 @@ import asyncio
 global queue
 queue = {}
 
+
 async def WriteKey(key, value):
     global queue
     queue[key] = value
+
 
 async def AppendKey(key, value):
     global queue
@@ -17,6 +19,7 @@ async def AppendKey(key, value):
         db = []
     db.append(value)
     await WriteKey(key, db)
+
 
 async def ReadKey(key):
     global queue
@@ -29,6 +32,7 @@ async def databace_flush():
         await asyncio.sleep(30)
         Flush()
 
+
 def Load():
     global queue
     if os.path.exists(config.databace_file):
@@ -36,6 +40,7 @@ def Load():
             queue = json.loads(f.read())
     else:
         queue = {}
+
 
 def Flush():
     global queue

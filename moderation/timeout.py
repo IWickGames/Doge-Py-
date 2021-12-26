@@ -7,21 +7,24 @@ from discord.ext import commands
 from utility import CheckHigharchy
 from discord.commands.commands import Option
 
+
 class Timeout(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    
+
     @groups.moderation.command()
     async def timeout(
         ctx: commands.Context,
         user: Option(discord.Member, description="The user to timeout", required=True),
         time: Option(
-            str, 
-            description="The amount of time to mute the user for", 
-            choices=["1 Minute", "5 Minutes", "10 Minutes", "1 Hour", "1 Day", "1 Week"],
+            str,
+            description="The amount of time to mute the user for",
+            choices=["1 Minute", "5 Minutes",
+                     "10 Minutes", "1 Hour", "1 Day", "1 Week"],
             required=True
         ),
-        reason: Option(str, description="The reason for the timeout", default="No reason spesified", required=False)
+        reason: Option(str, description="The reason for the timeout",
+                       default="No reason spesified", required=False)
     ):
         """Timeout a user for a certain amount of time"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)
@@ -51,7 +54,7 @@ class Timeout(commands.Cog):
             util = now + datetime.timedelta(minutes=5)
 
         await db.databace.AppendKey(
-            f"punishments.{user.id}.{ctx.guild.id}", 
+            f"punishments.{user.id}.{ctx.guild.id}",
             {
                 "type": "Timeout",
                 "reason": reason,
@@ -68,6 +71,7 @@ class Timeout(commands.Cog):
         await ctx.respond(
             f":white_check_mark: The user `{user.name}#{user.discriminator}` was successfully timeouted until {discord.utils.format_dt(util)}"
         )
+
 
 def setup(bot):
     bot.add_cog(Timeout(bot))

@@ -6,7 +6,7 @@ def MakeGroups(bot):
     global fun
 
     tricks = bot.create_group(
-        name="tricks", 
+        name="tricks",
         description="My trick set"
     )
 
@@ -16,18 +16,18 @@ def MakeGroups(bot):
         description="Some automated tasks"
     )
     """
-    
+
     moderation = bot.create_group(
-        name="moderation", 
+        name="moderation",
         description="Only autherised people here"
     )
 
     utilities = bot.create_group(
-        name="utilities", 
+        name="utilities",
         description="Some usefull things"
     )
 
     fun = bot.create_group(
-        name="fun", 
+        name="fun",
         description="The fun things"
     )

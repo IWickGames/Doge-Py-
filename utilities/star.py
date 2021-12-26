@@ -4,14 +4,16 @@ import discord
 from discord.ext import commands
 from discord.commands.commands import Option
 
+
 class Star(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    
+
     @groups.utilities.command()
     async def star(
-        ctx: commands.Context, 
-        message_id: Option(str, description="The ID of the message you would like to star", required=True)
+        ctx: commands.Context,
+        message_id: Option(
+            str, description="The ID of the message you would like to star", required=True)
     ):
         """Add a message to the servers star board"""
         if not ctx.author.guild_permissions.manage_messages:
@@ -38,18 +40,19 @@ class Star(commands.Cog):
         if not channel:
             await ctx.respond(":mag: Unable to locate a star-board channel", ephemeral=True)
             return
-            
 
         emb = discord.Embed(
             description=f"[Jump to message]({msg.jump_url})",
             color=config.embed_color
         )
         emb.set_author(name=msg.author.name, icon_url=msg.author.avatar.url)
-        emb.set_footer(text=f"#{msg.channel.name} • {discord.utils.format_dt(msg.created_at)}")
+        emb.set_footer(
+            text=f"#{msg.channel.name} • {discord.utils.format_dt(msg.created_at)}")
 
         await channel.send(embed=emb)
 
         await ctx.respond(f":white_check_mark: Added message id `{message_id}` to {channel.mention}")
-        
+
+
 def setup(bot):
     bot.add_cog(Star(bot))

@@ -3,10 +3,11 @@ import config
 import discord
 from discord.ext import commands
 
+
 class Afk(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    
+
     @groups.utilities.command()
     async def afk(ctx: commands.Context):
         """Toggle your AFK status"""
@@ -25,6 +26,7 @@ class Afk(commands.Cog):
             return
 
         await ctx.respond(":white_check_mark: Changed your AFK status", ephemeral=True)
+
 
 def setup(bot):
     bot.add_cog(Afk(bot))

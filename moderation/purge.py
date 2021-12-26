@@ -6,20 +6,22 @@ from typing import List
 from discord.ext import commands
 from discord.commands.commands import Option
 
+
 class Purge(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @groups.moderation.command()
     async def purge(
-        ctx: commands.Context, 
-        amount: Option(int, description="The amount of messages to purge", required=True)
+        ctx: commands.Context,
+        amount: Option(
+            int, description="The amount of messages to purge", required=True)
     ):
         """Removes a spesified amount of messages"""
         if not ctx.author.guild_permissions.manage_messages:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)
             return
-        
+
         if amount > 1000:
             await ctx.respond(":no_entry: Whoa! Purge has a maximum of 1000 messages per command.", ephemeral=True)
             return
@@ -47,10 +49,11 @@ class Purge(commands.Cog):
         except discord.HTTPException:
             await ctx.edit(content=config.bot_discorderror, ephemeral=True)
             return
-        
+
         await ctx.edit(
             content=f":white_check_mark: Successfully purged {amount} messages from `{ctx.channel.name}`"
         )
+
 
 def setup(bot):
     bot.add_cog(Purge(bot))
