@@ -14,17 +14,26 @@ class Draw(commands.Cog):
     async def draw(
         ctx: commands.Context,
         code: Option(
-            str, description="Width x Hight : 1 = Blue | 0 = Black", required=True)
+            str,
+            description="Width x Hight : 1 = Blue | 0 = Black",  # noqa: F722
+            required=True
+        )
     ):
         """Draws the spesified code to the screen using emotes"""
-        if not "x" in code.lower() or not ":" in code:
-            await ctx.respond(":anger: Grrrr, invalid draw code format", ephemeral=True)
+        if "x" not in code.lower() or ":" not in code:
+            await ctx.respond(
+                ":anger: Grrrr, invalid draw code format",
+                ephemeral=True
+            )
             return
 
         message = await EncodeDrawCode(code)
         if not message:
-            await ctx.respond(":anger: Grrrr, Failed to encode message, it may be out of bounds "
-                              "of your dimensions or has invalid characters", ephemeral=True)
+            await ctx.respond(
+                ":anger: Grrrr, Failed to encode message, it may be out of "
+                "bounds of your dimensions or has invalid characters",
+                ephemeral=True
+            )
             return
 
         emb = discord.Embed(

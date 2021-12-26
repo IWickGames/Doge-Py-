@@ -1,3 +1,5 @@
+# flake8: noqa: E501
+
 def PassBot(b):
     global bot
     bot = b

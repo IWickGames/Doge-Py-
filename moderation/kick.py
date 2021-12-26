@@ -14,9 +14,16 @@ class Kick(commands.Cog):
     @groups.moderation.command()
     async def kick(
         ctx: commands.Context,
-        user: Option(discord.User, description="User to kick", required=True),
+        user: Option(
+            discord.User,
+            description="User to kick",  # noqa: F722
+            required=True
+        ),
         reason: Option(
-            str, description="The reason for the kick", required=False)
+            str,
+            description="The reason for the kick",  # noqa: F722
+            required=False
+        )
     ):
         """Kicks a user from the server"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)
@@ -36,13 +43,18 @@ class Kick(commands.Cog):
         try:
             await ctx.guild.kick(user, reason=reason)
         except discord.Forbidden:
-            await ctx.respond(config.bot_permission_boterrormsg, ephemeral=True)
+            await ctx.respond(
+                config.bot_permission_boterrormsg,
+                ephemeral=True
+            )
             return
         except discord.HTTPException:
             await ctx.respond(config.bot_discorderror, ephemeral=True)
             return
 
-        await ctx.respond(f":hammer: Successfully kicked {user.name}#{user.discriminator}")
+        await ctx.respond(
+            f":hammer: Successfully kicked {user.name}#{user.discriminator}"
+        )
 
 
 def setup(bot):

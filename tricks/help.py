@@ -10,16 +10,36 @@ async def HelpTrics():
         title="Tricks",
         color=config.embed_color,
     )
-    emb.add_field(name="help", value="Display help page", inline=True)
     emb.add_field(
-        name="about", value="Displays information about the bot", inline=True)
+        name="help",
+        value="Display help page",
+        inline=True
+    )
     emb.add_field(
-        name="ping", value="Get the bots ping to Discord API", inline=True)
+        name="about",
+        value="Displays information about the bot",
+        inline=True
+    )
     emb.add_field(
-        name="pet", value="Tell me I am doing a good job :yum:", inline=True)
-    emb.add_field(name="fetch", value="Fetch this bone -> :bone:", inline=True)
-    emb.add_field(name="emote {emoji:Emoji}",
-                  value="Give you information on a emote", inline=True)
+        name="ping",
+        value="Get the bots ping to Discord API",
+        inline=True
+    )
+    emb.add_field(
+        name="pet",
+        value="Tell me I am doing a good job :yum:",
+        inline=True
+    )
+    emb.add_field(
+        name="fetch",
+        value="Fetch this bone -> :bone:",
+        inline=True
+    )
+    emb.add_field(
+        name="emote {emoji:Emoji}",
+        value="Give you information on a emote",
+        inline=True
+    )
     return emb
 
 
@@ -29,9 +49,15 @@ async def HelpTasks():
         color=config.embed_color,
     )
     emb.add_field(
-        name="OnJoin", value="Greets new users in the default channel", inline=True)
+        name="OnJoin",
+        value="Greets new users in the default channel",
+        inline=True
+    )
     emb.add_field(
-        name="OnLeave", value="Says goodbye to users in the default channel", inline=True)
+        name="OnLeave",
+        value="Says goodbye to users in the default channel",
+        inline=True
+    )
     return emb
 
 
@@ -40,18 +66,39 @@ async def HelpModeration():
         title="Moderation",
         color=config.embed_color,
     )
-    emb.add_field(name="purge {amount:Number<1000}",
-                  value="Purges amount messages from a channel (requires ManageMessages permission)", inline=True)
-    emb.add_field(name="warn {user:Mention} {reason:String}",
-                  value="Warns a user for an infraction (requires KickMemebers permission)", inline=True)
-    emb.add_field(name="timeout {user:Mention} {time:Choice} {reason:String}",
-                  value="Timeouts a user for a certain amount of time (required ModerateMembers permission)", inline=True)
-    emb.add_field(name="kick {user:Mention} {reason:String}",
-                  value="Kicks a user from the guild (requires KickMembers permission)", inline=True)
-    emb.add_field(name="ban {user:Mention} {reason:String}",
-                  value="Bans a user from the guild (requires BanMembers permission)", inline=True)
-    emb.add_field(name="punishments {user:Mention}",
-                  value="List a users past punishments", inline=True)
+    emb.add_field(
+        name="purge {amount:Number<1000}",
+        value="Purges amount messages from a channel"
+        " (requires ManageMessages permission)",
+        inline=True
+    )
+    emb.add_field(
+        name="warn {user:Mention} {reason:String}",
+        value="Warns a user for an infraction "
+        "(requires KickMemebers permission)",
+        inline=True
+    )
+    emb.add_field(
+        name="timeout {user:Mention} {time:Choice} {reason:String}",
+        value="Timeouts a user for a certain amount of time "
+        "(required ModerateMembers permission)",
+        inline=True
+    )
+    emb.add_field(
+        name="kick {user:Mention} {reason:String}",
+        value="Kicks a user from the guild (requires KickMembers permission)",
+        inline=True
+    )
+    emb.add_field(
+        name="ban {user:Mention} {reason:String}",
+        value="Bans a user from the guild (requires BanMembers permission)",
+        inline=True
+    )
+    emb.add_field(
+        name="punishments {user:Mention}",
+        value="List a users past punishments",
+        inline=True
+    )
     return emb
 
 
@@ -60,13 +107,27 @@ async def HelpUtilities():
         title="Utilities",
         color=config.embed_color
     )
-    emb.add_field(name="afk", value="Toggles your afk status", inline=True)
-    emb.add_field(name="poll {message:String}",
-                  value="Creates a poll message and adds reactions", inline=True)
-    emb.add_field(name="star {messageID:String}",
-                  value="Adds the message to the servers star channel (requires ManageMessages permission)", inline=True)
-    emb.add_field(name="userinfo {(Optional) user:Mention}",
-                  value="Sends information about a user", inline=True)
+    emb.add_field(
+        name="afk",
+        value="Toggles your afk status",
+        inline=True
+    )
+    emb.add_field(
+        name="poll {message:String}",
+        value="Creates a poll message and adds reactions",
+        inline=True
+    )
+    emb.add_field(
+        name="star {messageID:String}",
+        value="Adds the message to the servers star channel "
+        "(requires ManageMessages permission)",
+        inline=True
+    )
+    emb.add_field(
+        name="userinfo {(Optional) user:Mention}",
+        value="Sends information about a user",
+        inline=True
+    )
     return emb
 
 
@@ -75,12 +136,26 @@ async def HelpFun():
         title="Fun",
         color=config.embed_color
     )
-    emb.add_field(name="draw {code:String}",
-                  value="Draws the code onto the screen using emotes", inline=True)
-    emb.add_field(name="image {query:String}",
-                  value="Lookup a image online", inline=True)
-    emb.add_field(name="coinflip", value="Flip a coin", inline=True)
-    emb.add_field(name="meme", value="Get a dank meme", inline=True)
+    emb.add_field(
+        name="draw {code:String}",
+        value="Draws the code onto the screen using emotes",
+        inline=True
+    )
+    emb.add_field(
+        name="image {query:String}",
+        value="Lookup a image online",
+        inline=True
+    )
+    emb.add_field(
+        name="coinflip",
+        value="Flip a coin",
+        inline=True
+    )
+    emb.add_field(
+        name="meme",
+        value="Get a dank meme",
+        inline=True
+    )
     return emb
 
 
@@ -93,8 +168,14 @@ class Help(commands.Cog):
         ctx: commands.Context,
         category: Option(
             str,
-            description="Select a category to get help on",
-            choices=["tricks", "tasks", "moderation", "utilities", "fun"]
+            description="Select a category to get help on",  # noqa: F722
+            choices=[
+                "tricks",      # noqa: F821
+                "tasks",       # noqa: F821
+                "moderation",  # noqa: F821
+                "utilities",   # noqa: F821
+                "fun"          # noqa: F821
+            ]
         )
     ):
         """Display a help message"""
@@ -120,16 +201,21 @@ class Help(commands.Cog):
                 await ctx.respond(embed=await HelpFun())
                 return
 
-            await ctx.respond(f":anger: Grrrr, invalid category `{category}`", ephemeral=True)
+            await ctx.respond(
+                f":anger: Grrrr, invalid category `{category}`",
+                ephemeral=True
+            )
             return
 
         hEmb = discord.Embed(
             title=f"Hello {ctx.author.name} :wave:",
             color=config.embed_color,
-            description=f":guide_dog: I am your friendly Discord server doge to help you out on `{ctx.guild.name}` :smiley:\n"
+            description=":guide_dog: I am your friendly Discord server "
+            f"doge to help you out on `{ctx.guild.name}` :smiley:\n"
             + "( I also like being pet :wink: )\n\n"
 
-            + ":mega: Wolf! Here are the different catigories of things I can do,\n"
+            + ":mega: Wolf! Here are the different "
+            "catigories of things I can do,\n"
             + "`tricks`, `tasks`, `moderation`, `utilities`, `fun`\n\n"
             + "You can select one by doing `/help catigoryName`\n"
             + "Example: `/help tricks`"

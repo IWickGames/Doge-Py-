@@ -1,3 +1,4 @@
+# flake8: noqa: E501
 import discord
 import aiohttp
 from typing import List

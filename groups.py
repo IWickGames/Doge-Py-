@@ -12,7 +12,7 @@ def MakeGroups(bot):
 
     """
     tasks = bot.create_group(
-        name="tasks", 
+        name="tasks",
         description="Some automated tasks"
     )
     """

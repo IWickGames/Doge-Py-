@@ -12,7 +12,12 @@ bot = discord.Bot()
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="fetch"))
+    await bot.change_presence(
+        activity=discord.Activity(
+            type=discord.ActivityType.playing,
+            name="fetch"
+        )
+    )
     print(f"{bot.user.name}#{bot.user.discriminator} is now online")
 
 config.PassBot(bot)
@@ -27,7 +32,7 @@ for directory in config.cog_directorys:
 try:
     bot.loop.create_task(db.databace.databace_flush())
     bot.loop.run_until_complete(bot.start(config.token, reconnect=True))
-except:
+except:  # noqa: E722
     bot.loop.run_until_complete(bot.close())
 finally:
     db.databace.Flush()

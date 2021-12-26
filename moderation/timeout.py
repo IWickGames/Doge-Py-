@@ -15,16 +15,24 @@ class Timeout(commands.Cog):
     @groups.moderation.command()
     async def timeout(
         ctx: commands.Context,
-        user: Option(discord.Member, description="The user to timeout", required=True),
-        time: Option(
-            str,
-            description="The amount of time to mute the user for",
-            choices=["1 Minute", "5 Minutes",
-                     "10 Minutes", "1 Hour", "1 Day", "1 Week"],
+        user: Option(
+            discord.Member,
+            description="The user to timeout",  # noqa: F722
             required=True
         ),
-        reason: Option(str, description="The reason for the timeout",
-                       default="No reason spesified", required=False)
+        time: Option(
+            str,
+            description="The amount of time to mute the user for",  # noqa: F722, E501
+            choices=["1 Minute", "5 Minutes",                       # noqa: F722, E501
+                     "10 Minutes", "1 Hour", "1 Day", "1 Week"],    # noqa: F722, E501
+            required=True
+        ),
+        reason: Option(
+            str,
+            description="The reason for the timeout",  # noqa: F722
+            default="No reason spesified",             # noqa: F722
+            required=False
+        )
     ):
         """Timeout a user for a certain amount of time"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)
@@ -33,7 +41,11 @@ class Timeout(commands.Cog):
             return
 
         if user.timed_out:
-            await ctx.respond(f":hourglass_flowing_sand: The user `{user.name}#{user.discriminator}` is already in timeout", ephemeral=True)
+            await ctx.respond(
+                ":hourglass_flowing_sand: The user "
+                f"`{user.name}#{user.discriminator}` is already in timeout",
+                ephemeral=True
+            )
             return
 
         now = datetime.datetime.now()
@@ -65,11 +77,15 @@ class Timeout(commands.Cog):
         try:
             await user.timeout(until=util, reason=reason)
         except discord.Forbidden:
-            await ctx.respond(config.bot_permission_boterrormsg, ephemeral=True)
+            await ctx.respond(
+                config.bot_permission_boterrormsg,
+                ephemeral=True
+            )
             return
 
         await ctx.respond(
-            f":white_check_mark: The user `{user.name}#{user.discriminator}` was successfully timeouted until {discord.utils.format_dt(util)}"
+            f":white_check_mark: The user `{user.name}#{user.discriminator}` "
+            f"was successfully timeouted until {discord.utils.format_dt(util)}"
         )
 
 

@@ -3,8 +3,9 @@ import groups
 import random
 import discord
 from typing import List
+from utility import GetImages
+from utility import Image as ResponceImages
 from discord.ext import commands
-from utility import GetImages, Image
 
 
 class Image(commands.Cog):
@@ -17,9 +18,13 @@ class Image(commands.Cog):
         await ctx.respond(":satellite: Looking up images...")
 
         try:
-            img: List[Image] = await GetImages(query)
+            img: List[ResponceImages] = await GetImages(query)
         except Exception as err:
-            await ctx.edit(content=":no_enry: Failed to pull image from API (try again)")
+            print("Failed to grab images online")
+            print(err)
+            await ctx.edit(
+                content=":no_enry: Failed to pull image from API (try again)"
+            )
             return
 
         emb = discord.Embed(

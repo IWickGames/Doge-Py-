@@ -14,9 +14,16 @@ class Ban(commands.Cog):
     @groups.moderation.command()
     async def ban(
         ctx: commands.Context,
-        user: Option(discord.User, description="User to ban", required=True),
+        user: Option(
+            discord.User,
+            description="User to ban",  # noqa: F722
+            required=True
+        ),
         reason: Option(
-            str, description="The reason for the ban", required=False)
+            str,
+            description="The reason for the ban",  # noqa: F722
+            required=False
+        )
     ):
         """Ban a user from the server"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)
@@ -36,13 +43,19 @@ class Ban(commands.Cog):
         try:
             await ctx.guild.ban(user, reason=reason)
         except discord.Forbidden:
-            await ctx.respond(config.bot_permission_boterrormsg, ephemeral=True)
+            await ctx.respond(
+                config.bot_permission_boterrormsg,
+                ephemeral=True
+            )
             return
         except discord.HTTPException:
             await ctx.respond(config.bot_discorderror, ephemeral=True)
             return
 
-        await ctx.respond(f":hammer: Successfully banned {user.name}#{user.discriminator}", ephemeral=True)
+        await ctx.respond(
+            f":hammer: Successfully banned {user.name}#{user.discriminator}",
+            ephemeral=True
+        )
 
 
 def setup(bot):

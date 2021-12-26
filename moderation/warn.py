@@ -14,9 +14,16 @@ class Warn(commands.Cog):
     @groups.moderation.command()
     async def warn(
         ctx: commands.Context,
-        user: Option(discord.User, description="The user to warn", required=True),
+        user: Option(
+            discord.User,
+            description="The user to warn",  # noqa: F722
+            required=True
+        ),
         reason: Option(
-            str, description="The reasion to warn the user", required=True)
+            str,
+            description="The reasion to warn the user",  # noqa: F722
+            required=True
+        )
     ):
         """Warns a user on your server via a direct message"""
         higharchy: bool = await CheckHigharchy(user, ctx.author)
@@ -51,13 +58,20 @@ class Warn(commands.Cog):
         try:
             await user.send(embed=emb)
         except discord.Forbidden:
-            await ctx.respond(":mailbox_with_mail: The spesified user has direct messaging disabled", ephemeral=True)
+            await ctx.respond(
+                ":mailbox_with_mail: The spesified user "
+                "has direct messaging disabled",
+                ephemeral=True
+            )
             return
         except discord.HTTPException:
             await ctx.respond(config.bot_discorderror, ephemeral=True)
             return
 
-        await ctx.respond(f":white_check_mark: Warned {user.name}#{user.discriminator} successfully")
+        await ctx.respond(
+            f":white_check_mark: Warned {user.name}#{user.discriminator} "
+            "successfully"
+        )
 
 
 def setup(bot):

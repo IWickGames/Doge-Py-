@@ -21,7 +21,10 @@ class Emote(commands.Cog):
     async def emote(
         ctx: commands.Context,
         emoji: Option(
-            str, description="The emoji send in a string", required=True)
+            str,
+            description="The emoji send in a string",  # noqa: F722
+            required=True
+        )
     ):
         """Gives you information about an custom emote"""
         if not emoji.startswith("<"):
@@ -36,9 +39,14 @@ class Emote(commands.Cog):
             color=config.embed_color
         )
         emb.add_field(name="ID", value=GetEmoteID(emoji))
-        emb.add_field(name="Identifier",
-                      value=f"\\<:{GetEmoteName(emoji)}:{GetEmoteID(emoji)}\\>")
-        await ctx.respond(content=":compass: Here is what I know about that emoji", embed=emb)
+        emb.add_field(
+            name="Identifier",
+            value=f"\\<:{GetEmoteName(emoji)}:{GetEmoteID(emoji)}\\>"
+        )
+        await ctx.respond(
+            content=":compass: Here is what I know about that emoji",
+            embed=emb
+        )
 
 
 def setup(bot):
