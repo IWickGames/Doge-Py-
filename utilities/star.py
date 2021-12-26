@@ -13,7 +13,10 @@ class Star(commands.Cog):
     async def star(
         ctx: commands.Context,
         message_id: Option(
-            str, description="The ID of the message you would like to star", required=True)
+            str,
+            description="The ID of the message you would like to star",  # noqa: F722, E501
+            required=True
+        )
     ):
         """Add a message to the servers star board"""
         if not ctx.author.guild_permissions.manage_messages:
@@ -23,10 +26,16 @@ class Star(commands.Cog):
         try:
             msg: discord.Message = await ctx.fetch_message(int(message_id))
         except discord.NotFound:
-            await ctx.respond(":mag: Unable to locate the spesified message ID", ephemeral=True)
+            await ctx.respond(
+                ":mag: Unable to locate the spesified message ID",
+                ephemeral=True
+            )
             return
         except discord.Forbidden:
-            await ctx.respond(config.bot_permission_boterrormsg, ephemeral=True)
+            await ctx.respond(
+                config.bot_permission_boterrormsg,
+                ephemeral=True
+            )
             return
         except discord.HTTPException:
             await ctx.respond(config.bot_discorderror, ephemeral=True)
@@ -38,7 +47,10 @@ class Star(commands.Cog):
                 channel = chl
                 break
         if not channel:
-            await ctx.respond(":mag: Unable to locate a star-board channel", ephemeral=True)
+            await ctx.respond(
+                ":mag: Unable to locate a star-board channel",
+                ephemeral=True
+            )
             return
 
         emb = discord.Embed(
@@ -47,11 +59,16 @@ class Star(commands.Cog):
         )
         emb.set_author(name=msg.author.name, icon_url=msg.author.avatar.url)
         emb.set_footer(
-            text=f"#{msg.channel.name} • {discord.utils.format_dt(msg.created_at)}")
+            text=f"#{msg.channel.name} • "
+            f"{discord.utils.format_dt(msg.created_at)}"
+        )
 
         await channel.send(embed=emb)
 
-        await ctx.respond(f":white_check_mark: Added message id `{message_id}` to {channel.mention}")
+        await ctx.respond(
+            ":white_check_mark: Added message "
+            f"id `{message_id}` to {channel.mention}"
+        )
 
 
 def setup(bot):

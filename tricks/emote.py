@@ -5,11 +5,11 @@ from discord.ext import commands
 from discord.commands.commands import Option
 
 
-def GetEmoteName(em):
+async def GetEmoteName(em):
     return em.split(':')[1]
 
 
-def GetEmoteID(em):
+async def GetEmoteID(em):
     return em.split(':')[2].split('>')[0]
 
 
@@ -35,13 +35,13 @@ class Emote(commands.Cog):
             return
 
         emb = discord.Embed(
-            title=GetEmoteName(emoji),
+            title=await GetEmoteName(emoji),
             color=config.embed_color
         )
-        emb.add_field(name="ID", value=GetEmoteID(emoji))
+        emb.add_field(name="ID", value=await GetEmoteID(emoji))
         emb.add_field(
             name="Identifier",
-            value=f"\\<:{GetEmoteName(emoji)}:{GetEmoteID(emoji)}\\>"
+            value=f"\\<:{await GetEmoteName(emoji)}:{await GetEmoteID(emoji)}\\>"  # noqa: E501
         )
         await ctx.respond(
             content=":compass: Here is what I know about that emoji",

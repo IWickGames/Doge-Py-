@@ -12,7 +12,11 @@ class Poll(commands.Cog):
     @groups.utilities.command()
     async def poll(
         ctx: commands.Context,
-        message: Option(str, description="The poll message", required=True)
+        message: Option(
+            str,
+            description="The poll message",  # noqa: F722
+            required=True
+        )
     ):
         """Create a simple thumbs up or down poll"""
         emb = discord.Embed(
@@ -21,11 +25,16 @@ class Poll(commands.Cog):
             description="Place your vote below with :thumbsup: or :thumbsdown:"
         )
         emb.set_footer(
-            text=f"Poll started by {ctx.author.name}#{ctx.author.discriminator}")
+            text="Poll started by"
+            f" {ctx.author.name}#{ctx.author.discriminator}"
+        )
         msg: discord.Message = await ctx.send(embed=emb)
         await msg.add_reaction("👍")
         await msg.add_reaction("👎")
-        await ctx.respond(":white_check_mark: Poll created successfully", ephemeral=True)
+        await ctx.respond(
+            ":white_check_mark: Poll created successfully",
+            ephemeral=True
+        )
 
 
 def setup(bot):

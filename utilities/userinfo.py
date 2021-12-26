@@ -13,7 +13,10 @@ class Userinfo(commands.Cog):
     async def userinfo(
         ctx: commands.Context,
         user: Option(
-            discord.Member, description="The user to view information on", default=None)
+            discord.Member,
+            description="The user to view information on",  # noqa: F722
+            default=None
+        )
     ):
         """Get information about a user"""
         if not user:
@@ -26,7 +29,7 @@ class Userinfo(commands.Cog):
         )
         emb.set_thumbnail(url=user.avatar.url)
 
-        if member.nick != None:
+        if member.nick is not None:
             emb.add_field(name="Nickname", value=member.nick, inline=True)
 
         emb.add_field(name="Created", value=discord.utils.format_dt(
