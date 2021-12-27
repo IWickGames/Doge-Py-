@@ -4,6 +4,7 @@ def MakeGroups(bot):
     global moderation
     global utilities
     global fun
+    global leveling
 
     tricks = bot.create_group(
         name="tricks",
@@ -30,4 +31,9 @@ def MakeGroups(bot):
     fun = bot.create_group(
         name="fun",
         description="The fun things"
+    )
+
+    leveling = bot.create_group(
+        name="leveling",
+        description="Leveling system"
     )
