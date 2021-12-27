@@ -10,7 +10,7 @@ token = open("token.env").read()
 test_servers = [735935481950503043, 673399675818213385]
 # test_servers = []
 databace_file = "db/bot.db"
-cog_directorys = ["tricks", "fun", "moderation", "utilities", "leveling"]
+cog_directorys = ["tasks", "tricks", "fun", "moderation", "utilities", "leveling"]
 embed_color = int("fcd111", 16)
 meme_api = "https://meme-api.herokuapp.com/gimme"
 
