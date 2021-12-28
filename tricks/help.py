@@ -1,5 +1,6 @@
 import config
 import groups
+import db.sets
 import discord
 from discord.ext import commands
 from discord.commands.commands import Option
@@ -159,6 +160,47 @@ async def HelpFun():
     return emb
 
 
+async def HelpLeveling():
+    emb = discord.Embed(
+        title="Leveling",
+        color=config.embed_color
+    )
+    emb.add_field(
+        name="level",
+        value="Display your level and experience",
+        inline=True
+    )
+    return emb
+
+
+async def HelpSettings():
+    emb = discord.Embed(
+        title="Settings",
+        description="Message settings can have spesial arguments that will be"
+        " replaced when sent by the bot\n`{username}`: Username of the user"
+        "\n`{discriminator}`: The 4 numbers in a users profile"
+        "\n`{id}`: The ID of the user"
+        "\n`{mention}`: Mentions the user"
+        "\n`{created}`: The date the user was created"
+        "\nYou can also put `None` in as the message to disable said setting",
+        color=config.embed_color
+    )
+    emb.add_field(
+        name="set",
+        value="Set a configuration value for both user and guild",
+        inline=True
+    )
+    emb.add_field(
+        name="User Settings",
+        value=", ".join(db.sets.user_settings) or "None"
+    )
+    emb.add_field(
+        name="Guild Settings",
+        value=", ".join(db.sets.guild_settings) or "None"
+    )
+    return emb
+
+
 class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -170,42 +212,57 @@ class Help(commands.Cog):
             str,
             description="Select a category to get help on",  # noqa: F722
             choices=[
-                "tricks",      # noqa: F821
-                "tasks",       # noqa: F821
-                "moderation",  # noqa: F821
-                "utilities",   # noqa: F821
-                "fun"          # noqa: F821
-            ]
+                "fun",          # noqa: F821
+                "leveling",     # noqa: F821
+                "moderation",   # noqa: F821
+                "settings",     # noqa: F821
+                "tasks",        # noqa: F821
+                "tricks",       # noqa: F821
+                "utilities",    # noqa: F821
+            ],
+            default=""  # noqa: F722
         )
     ):
         """Display a help message"""
 
-        if category:
-            if category == "tricks":
+        match category:
+            case "tricks":
                 await ctx.respond(embed=await HelpTrics())
                 return
 
-            if category == "tasks":
+            case "tasks":
                 await ctx.respond(embed=await HelpTasks())
                 return
 
-            if category == "moderation":
+            case "moderation":
                 await ctx.respond(embed=await HelpModeration())
                 return
 
-            if category == "utilities":
+            case "utilities":
                 await ctx.respond(embed=await HelpUtilities())
                 return
 
-            if category == "fun":
+            case "fun":
                 await ctx.respond(embed=await HelpFun())
                 return
 
-            await ctx.respond(
-                f":anger: Grrrr, invalid category `{category}`",
-                ephemeral=True
-            )
-            return
+            case "leveling":
+                await ctx.respond(embed=await HelpLeveling())
+                return
+
+            case "settings":
+                await ctx.respond(embed=await HelpSettings())
+                return
+
+            case "":
+                pass
+
+            case _:
+                await ctx.respond(
+                    f":anger: Grrrr, invalid category `{category}`",
+                    ephemeral=True
+                )
+                return
 
         hEmb = discord.Embed(
             title=f"Hello {ctx.author.name} :wave:",

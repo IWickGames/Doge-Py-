@@ -76,3 +76,11 @@ async def EncodeDrawCode(codeRaw):
             return None
 
     return message
+
+async def InputMessageArguments(member: discord.Member, message: str):
+    message = message.replace("{username}", member.name)
+    message = message.replace("{discriminator}", member.discriminator)
+    message = message.replace("{id}", member.id)
+    message = message.replace("{mention}", member.mention)
+    message = message.replace("{created}", discord.utils.format_dt(member.created_at))
+    return message

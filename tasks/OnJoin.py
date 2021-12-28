@@ -1,4 +1,5 @@
 import discord
+import utility
 import db.databace
 from discord.ext import commands
 
@@ -13,11 +14,14 @@ class OnJoin(commands.Cog):
             f"settings.{member.guild}.join_message"
         )
         if not message:
-            message = f":inbox_tray: Welcome `{member.name}#"
-            f"{member.discriminator} ({member.id})` to `{member.guild.name}`"
+            message = ":inbox_tray: Welcome `{username}#"
+            "{discriminator} ({id})`, we are glad to have you!"
+
+        if message == "None":
+            return
 
         await member.guild.system_channel.send(
-            message
+            await utility.InputMessageArguments(member, message)
         )
 
 
