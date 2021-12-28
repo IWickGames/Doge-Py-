@@ -20,9 +20,12 @@ class OnLeave(commands.Cog):
         if message == "None":
             return
 
-        await member.guild.system_channel.send(
-            await utility.InputMessageArguments(member, message)
-        )
+        try:
+            await member.guild.system_channel.send(
+                await utility.InputMessageArguments(member, message)
+            )
+        except discord.Forbidden:
+            return
 
 
 def setup(bot):
