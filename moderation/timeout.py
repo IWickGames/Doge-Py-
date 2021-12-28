@@ -50,20 +50,21 @@ class Timeout(commands.Cog):
 
         now = datetime.datetime.now()
 
-        if time == "1 Minute":
-            util = now + datetime.timedelta(seconds=60)
-        elif time == "5 Minutes":
-            util = now + datetime.timedelta(minutes=5)
-        elif time == "10 Minutes":
-            util = now + datetime.timedelta(minutes=10)
-        elif time == "1 Hour":
-            util = now + datetime.timedelta(hours=1)
-        elif time == "1 Day":
-            util = now + datetime.timedelta(days=1)
-        elif time == "1 Week":
-            util = now + datetime.timedelta(weeks=1)
-        else:
-            util = now + datetime.timedelta(minutes=5)
+        match time:
+            case "1 Minute":
+                util = now + datetime.timedelta(seconds=60)
+            case "5 Minutes":
+                util = now + datetime.timedelta(minutes=5)
+            case "10 Minutes":
+                util = now + datetime.timedelta(minutes=10)
+            case "1 Hour":
+                util = now + datetime.timedelta(hours=1)
+            case "1 Day":
+                util = now + datetime.timedelta(days=1)
+            case "1 Week":
+                util = now + datetime.timedelta(weeks=1)
+            case _:
+                util = now + datetime.timedelta(minutes=5)
 
         await db.databace.AppendKey(
             f"punishments.{user.id}.{ctx.guild.id}",
