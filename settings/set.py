@@ -1,4 +1,5 @@
 import groups
+import config
 import db.sets
 import db.databace
 from discord.ext import commands
@@ -44,6 +45,13 @@ class Set(commands.Cog):
                     value
                 )
             case "Guild":
+                if not ctx.author.guild_permissions.administrator:
+                    await ctx.respond(
+                        config.bot_permission_errormsg,
+                        ephemeral=True
+                    )
+                    return
+
                 if setting not in db.sets.guild_settings:
                     await ctx.respond(
                         f"Invalid guild setting `{setting}`",

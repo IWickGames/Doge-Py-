@@ -8,7 +8,7 @@ class OnMessage(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_message(message: discord.Message):
+    async def on_message(self, message: discord.Message):
         if message.author.bot:
             return
 

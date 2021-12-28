@@ -8,7 +8,7 @@ class OnLeave(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_member_remove(member: discord.Member):
+    async def on_member_remove(self, member: discord.Member):
         message = await db.databace.ReadKey(
             f"settings.{member.guild}.leave_message"
         )
