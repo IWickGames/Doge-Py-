@@ -6,6 +6,7 @@ def MakeGroups(bot):
     global fun
     global leveling
     global settings
+    global tickets
 
     tricks = bot.create_group(
         name="tricks",
@@ -42,4 +43,10 @@ def MakeGroups(bot):
     settings = bot.create_group(
         name="settings",
         description="Manage user and guild settings"
+    )
+
+    tickets = bot.create_group(
+        name="tickets",
+        description="Ticketing feature for users "
+        "to create tickets on your guild"
     )
