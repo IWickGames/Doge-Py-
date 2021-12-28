@@ -201,6 +201,25 @@ async def HelpSettings():
     return emb
 
 
+async def HelpTickets():
+    emb = discord.Embed(
+        title="Tickets",
+        description="Create and close tickets in your guild easially\n"
+        "(Note you must enable this feature in the settings before use)"
+    )
+    emb.add_field(
+        name="create",
+        value="Creates a new ticket",
+        inline=True
+    )
+    emb.add_field(
+        name="close",
+        value="Closes a ticket channel when executed",
+        inline=True
+    )
+    return emb
+
+
 class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -252,6 +271,10 @@ class Help(commands.Cog):
 
             case "settings":
                 await ctx.respond(embed=await HelpSettings())
+                return
+
+            case "tickets":
+                await ctx.respond(embed=await HelpTickets())
                 return
 
             case "":
