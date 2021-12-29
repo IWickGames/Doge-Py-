@@ -1,17 +1,16 @@
 import groups
 import config
-import db.sets
 import db.databace
 from discord.ext import commands
 from discord.commands.commands import Option
 
 
-class Set(commands.Cog):
+class Disable(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @groups.settings.command()
-    async def set(
+    async def disable(
         ctx: commands.Context,
         type: Option(
             str,
@@ -21,17 +20,11 @@ class Set(commands.Cog):
         ),
         setting: Option(
             str,
-            description="The setting you wish to change",  # noqa: F722
-            required=True
-        ),
-        value: Option(
-            str,
-            description="The new value of the setting",  # noqa: F722
+            description="The setting you wish to disable",  # noqa: F722
             required=True
         )
     ):
-        """Configure User and Guild settings"""
-
+        """Set a setting to disabled"""
         match type:
             case "User":
                 if setting not in db.sets.user_settings:
@@ -40,9 +33,9 @@ class Set(commands.Cog):
                         ephemeral=True
                     )
                     return
-                await db.databace.WriteKey(
-                    f"settings.{ctx.author.id}.{setting}",
-                    value
+
+                await db.databace.RemoveKey(
+                    f"settings.{ctx.author.id}.{setting}"
                 )
             case "Guild":
                 if not ctx.author.guild_permissions.administrator:
@@ -58,9 +51,8 @@ class Set(commands.Cog):
                         ephemeral=True
                     )
                     return
-                await db.databace.WriteKey(
-                    f"settings.{ctx.guild.id}.{setting}",
-                    value
+                await db.databace.RemoveKey(
+                    f"settings.{ctx.guild.id}.{setting}"
                 )
 
         await ctx.respond(
@@ -70,4 +62,4 @@ class Set(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Set(bot))
+    bot.add_cog(Disable(bot))

@@ -56,6 +56,20 @@ async def ReadKey(key):
     global queue
     return queue.get(key)
 
+async def RemoveKey(key):
+    """
+    Deletes a key from the databace
+
+    Arguments:
+        key: The access key to delete
+    
+    Returns:
+        None / Nothing
+    """
+    global queue
+    if key in queue.keys():
+        queue.pop(key)
+
 
 async def databace_flush():
     """

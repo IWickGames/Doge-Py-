@@ -18,7 +18,7 @@ class Create(commands.Cog):
             f"settings.{ctx.guild.id}.enable_tickets"
         )
 
-        if not enabled:
+        if not enabled or enabled != "True":
             await ctx.respond(
                 "Ticketing is disable on this guild",
                 ephemeral=True

@@ -11,4 +11,4 @@
 ### leave_message
 > Sets the guild leave message (set to None to disable)
 ### enable_tickets
-> Enable ticketing system for the guild
+> Enable ticketing system for the guild (True = enabled)
