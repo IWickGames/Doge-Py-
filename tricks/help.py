@@ -129,6 +129,16 @@ async def HelpUtilities():
         value="Sends information about a user",
         inline=True
     )
+    emb.add_field(
+        name="hash {algorithm:Choice} {text:String}",
+        value="Hashes the given text using the selected algorithm",
+        inline=True
+    )
+    emb.add_field(
+        name="base64 {operation:Chocie} {text:String}",
+        value="Encodes and decodes a string using base64",
+        inline=True
+    )
     return emb
 
 
