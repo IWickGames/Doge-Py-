@@ -18,7 +18,8 @@ cog_directorys = [
     "fun",
     "moderation",
     "utilities",
-    "leveling"
+    "leveling",
+    "economy"
 ]
 embed_color = int("fcd111", 16)
 meme_api = "https://meme-api.herokuapp.com/gimme"

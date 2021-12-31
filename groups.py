@@ -1,24 +1,17 @@
 def MakeGroups(bot):
     global tricks
-    global tasks
     global moderation
     global utilities
     global fun
     global leveling
     global settings
     global tickets
+    global economy
 
     tricks = bot.create_group(
         name="tricks",
         description="My trick set"
     )
-
-    """
-    tasks = bot.create_group(
-        name="tasks",
-        description="Some automated tasks"
-    )
-    """
 
     moderation = bot.create_group(
         name="moderation",
@@ -49,4 +42,9 @@ def MakeGroups(bot):
         name="tickets",
         description="Ticketing feature for users "
         "to create tickets on your guild"
+    )
+
+    economy = bot.create_group(
+        name="economy",
+        description="Show me the moneeeeeeeey"
     )

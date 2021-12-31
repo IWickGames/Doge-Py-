@@ -1,0 +1,41 @@
+import groups
+import config
+import discord
+import db.databace
+from discord.ext import commands
+from discord.commands.commands import Option
+
+
+class Balance(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @groups.economy.command()
+    async def balance(
+        ctx: commands.Context,
+        user: Option(
+            discord.User,
+            description="The user to lookup",  # noqa: F722
+            required=True
+        )
+    ):
+        """Get the balance of a user"""
+
+        balance = await db.databace.ReadKey(
+            f"economy.{user.id}.balance"
+        )
+
+        emb = discord.Embed(
+            description=f":coin: Balance: `{balance or 0}`",
+            color=config.embed_color
+        )
+        emb.set_author(
+            name=user.name,
+            icon_url=user.avatar.url
+        )
+
+        await ctx.respond(embed=emb)
+
+
+def setup(bot):
+    bot.add_cog(Balance(bot))

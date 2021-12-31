@@ -215,7 +215,8 @@ async def HelpTickets():
     emb = discord.Embed(
         title="Tickets",
         description="Create and close tickets in your guild easially\n"
-        "(Note you must enable this feature in the settings before use)"
+        "(Note you must enable this feature in the settings before use)",
+        color=config.embed_color
     )
     emb.add_field(
         name="create",
@@ -225,6 +226,30 @@ async def HelpTickets():
     emb.add_field(
         name="close",
         value="Closes a ticket channel when executed",
+        inline=True
+    )
+    return emb
+
+
+async def HelpEconomy():
+    emb = discord.Embed(
+        title="Economy",
+        description="Show me the moneeeeeeeeeeey",
+        color=config.embed_color
+    )
+    emb.add_field(
+        name="credit {amount:Int}",
+        value="Converts leveling experience into economy",
+        inline=True
+    )
+    emb.add_field(
+        name="balance {user:User}",
+        value="Get the balance of a user",
+        inline=True
+    )
+    emb.add_field(
+        name="pay {user:User} {amount:Int}",
+        value="Pays a user",
         inline=True
     )
     return emb
@@ -243,6 +268,7 @@ class Help(commands.Cog):
             choices=[
                 "fun",          # noqa: F821
                 "leveling",     # noqa: F821
+                "economy",      # noqa: F821
                 "moderation",   # noqa: F821
                 "settings",     # noqa: F821
                 "tasks",        # noqa: F821
@@ -285,6 +311,10 @@ class Help(commands.Cog):
 
             case "tickets":
                 await ctx.respond(embed=await HelpTickets())
+                return
+
+            case "economy":
+                await ctx.respond(embed=await HelpEconomy())
                 return
 
             case "":

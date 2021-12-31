@@ -3,6 +3,7 @@ import config
 import discord
 import db.databace
 from discord.ext import commands
+from discord.commands.commands import Option
 
 
 class Level(commands.Cog):
@@ -10,11 +11,25 @@ class Level(commands.Cog):
         self.bot = bot
 
     @groups.leveling.command()
-    async def level(ctx: commands.Context):
+    async def level(
+        ctx: commands.Context,
+        user: Option(
+            discord.User,
+            description="The user to lookup",  # noqa: F722
+            required=True
+        )
+    ):
         """Display your current message level and experience"""
 
+        if user.bot:
+            await ctx.respond(
+                "Cannot lookup level of bot accounts",
+                ephemeral=True
+            )
+            return
+
         exp = await db.databace.ReadKey(
-            f"leveling.{ctx.author.id}.{ctx.guild.id}"
+            f"leveling.{user.id}.{ctx.guild.id}"
         )
         if not exp:
             exp = 0
@@ -23,8 +38,8 @@ class Level(commands.Cog):
             color=config.embed_color
         )
         emb.set_author(
-            name=ctx.author.name,
-            icon_url=ctx.author.avatar.url
+            name=user.name,
+            icon_url=user.avatar.url
         )
         emb.add_field(
             name="Level",
