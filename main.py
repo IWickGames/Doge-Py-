@@ -31,7 +31,7 @@ for directory in config.cog_directorys:
             bot.load_extension(f'{directory}.{cog[:-3]}')
     print("")
 
-print("==== Initalization complete ====")
+print("====    Initalization complete     ====")
 
 try:
     print("Starting Discord websocket...")
