@@ -6,7 +6,7 @@ import discord
 import db.databace
 from sys import path
 
-print("==== Starting bot initalization... ====")
+print("==== Starting bot initialization... ====")
 
 path.append(os.path.realpath("."))
 
@@ -31,7 +31,7 @@ for directory in config.cog_directorys:
             bot.load_extension(f'{directory}.{cog[:-3]}')
     print("")
 
-print("====    Initalization complete     ====")
+print("====    Initialization complete     ====")
 
 try:
     print("Starting Discord websocket...")
