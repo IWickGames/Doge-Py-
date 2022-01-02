@@ -88,6 +88,7 @@ async def databace_flush():
         await asyncio.sleep(30)
         if updated:
             Flush()
+            updated = False
 
 
 def Load():
