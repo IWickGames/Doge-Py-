@@ -1,6 +1,7 @@
 import groups
 import config
 import discord
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -19,6 +20,11 @@ class Userinfo(commands.Cog):
         )
     ):
         """Get information about a user"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed UserInfo in Utilities"
+        )
+
         if not user:
             user = ctx.author
 

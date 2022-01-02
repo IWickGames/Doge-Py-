@@ -2,6 +2,7 @@ import groups
 import config
 import discord
 import db.databace
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -20,6 +21,10 @@ class Balance(commands.Cog):
         )
     ):
         """Get the balance of a user"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Balance in Economy"
+        )
 
         balance = await db.databace.ReadKey(
             f"economy.{user.id}.balance"

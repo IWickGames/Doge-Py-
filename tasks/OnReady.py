@@ -1,5 +1,6 @@
 import config
 import discord
+import log.logging
 from discord.ext import commands
 
 
@@ -15,7 +16,7 @@ class OnReady(commands.Cog):
                 name="fetch"
             )
         )
-        print(
+        await log.logging.Info(
             f"{config.bot.user.name}#{config.bot.user.discriminator} "
             "is now online"
         )

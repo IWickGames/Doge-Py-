@@ -1,6 +1,7 @@
 import groups
 import base64
 import binascii
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -28,6 +29,10 @@ class Base64(commands.Cog):
         )
     ):
         """Encodes and decodes text into and out of base64"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Base64 in Utilities"
+        )
 
         try:
             match operation:

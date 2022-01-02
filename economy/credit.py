@@ -1,5 +1,6 @@
 import groups
 import db.databace
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -18,6 +19,10 @@ class Credit(commands.Cog):
         )
     ):
         """Converts your guild experience into global currency"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Credit in Economy"
+        )
 
         if amount == 0:
             await ctx.respond(

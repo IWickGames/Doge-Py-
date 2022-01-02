@@ -3,6 +3,7 @@ import config
 import random
 import discord
 import db.databace
+import log.logging
 from datetime import datetime
 from discord.ext import commands
 
@@ -14,6 +15,11 @@ class Create(commands.Cog):
     @groups.tickets.command()
     async def create(ctx: commands.Context):
         """Create a new ticket"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Create in Tickets"
+        )
+
         enabled = await db.databace.ReadKey(
             f"settings.{ctx.guild.id}.enable_tickets"
         )

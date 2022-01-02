@@ -1,6 +1,7 @@
 import groups
 import config
 import discord
+import log.logging
 from discord.ext import commands
 
 
@@ -11,6 +12,11 @@ class About(commands.Cog):
     @groups.tricks.command()
     async def about(ctx: commands.Context):
         """Display information about this bot"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed About in Tricks"
+        )
+
         emb = discord.Embed(
             title="About Doge",
             description="""

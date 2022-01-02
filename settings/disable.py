@@ -1,6 +1,7 @@
 import groups
 import config
 import db.databace
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -25,6 +26,11 @@ class Disable(commands.Cog):
         )
     ):
         """Set a setting to disabled"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Disable in Settings"
+        )
+
         match type:
             case "User":
                 if setting not in db.sets.user_settings:

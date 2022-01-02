@@ -1,6 +1,7 @@
 import groups
 import config
 import discord
+import log.logging
 from discord.ext import commands
 
 
@@ -11,6 +12,11 @@ class Afk(commands.Cog):
     @groups.utilities.command()
     async def afk(ctx: commands.Context):
         """Toggle your AFK status"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed AFK in Utilities"
+        )
+
         try:
             member: discord.Member = await ctx.guild.fetch_member(
                 ctx.author.id

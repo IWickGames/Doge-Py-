@@ -2,6 +2,7 @@ import config
 import groups
 import db.sets
 import discord
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -279,6 +280,10 @@ class Help(commands.Cog):
         )
     ):
         """Display a help message"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Help in Tricks"
+        )
 
         match category:
             case "tricks":

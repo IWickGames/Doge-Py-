@@ -1,5 +1,6 @@
 import groups
 import hashlib
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -31,6 +32,10 @@ class Hash(commands.Cog):
         )
     ):
         """Hash a string using a bunch of algorithms"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Hash in Utilities"
+        )
 
         match algorithm:
             case "md5":

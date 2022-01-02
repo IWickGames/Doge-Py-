@@ -1,5 +1,6 @@
 import groups
 import discord
+import log.logging
 from discord.ext import commands
 
 
@@ -10,6 +11,11 @@ class Close(commands.Cog):
     @groups.tickets.command()
     async def close(ctx: commands.Context):
         """Run this inside a open ticket to close it"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Close in Tickets"
+        )
+
         if not ctx.channel.name.startswith("ticket-"):
             await ctx.respond(
                 "This is not a ticket channel",

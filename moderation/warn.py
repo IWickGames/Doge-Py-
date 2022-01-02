@@ -2,6 +2,7 @@ import groups
 import config
 import discord
 import db.databace
+import log.logging
 from discord.ext import commands
 from utility import CheckHigharchy
 from discord.commands.commands import Option
@@ -26,6 +27,11 @@ class Warn(commands.Cog):
         )
     ):
         """Warns a user on your server via a direct message"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Warn in Moderation"
+        )
+
         higharchy: bool = await CheckHigharchy(user, ctx.author)
         if not ctx.author.guild_permissions.ban_members or higharchy:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)

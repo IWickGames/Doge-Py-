@@ -1,6 +1,7 @@
 import groups
 import config
 import discord
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -27,6 +28,11 @@ class Emote(commands.Cog):
         )
     ):
         """Gives you information about an custom emote"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Emote in Tricks"
+        )
+
         if not emoji.startswith("<"):
             await ctx.respond(
                 ":compass: That emoji does not have a discord identifier",

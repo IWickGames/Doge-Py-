@@ -1,6 +1,7 @@
 import groups
 import config
 import discord
+import log.logging
 from discord.ext import commands
 from utility import EncodeDrawCode
 from discord.commands.commands import Option
@@ -20,6 +21,11 @@ class Draw(commands.Cog):
         )
     ):
         """Draws the spesified code to the screen using emotes"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Draw in Fun"
+        )
+
         if "x" not in code.lower() or ":" not in code:
             await ctx.respond(
                 ":anger: Grrrr, invalid draw code format",

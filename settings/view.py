@@ -2,6 +2,7 @@ import groups
 import config
 import db.sets
 import db.databace
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -26,6 +27,10 @@ class View(commands.Cog):
         )
     ):
         """View a configuration value"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed View in Settings"
+        )
 
         match type:
             case "User":

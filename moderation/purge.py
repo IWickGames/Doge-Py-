@@ -2,6 +2,7 @@ import groups
 import config
 import discord
 import asyncio
+import log.logging
 from typing import List
 from discord.ext import commands
 from discord.commands.commands import Option
@@ -21,6 +22,11 @@ class Purge(commands.Cog):
         )
     ):
         """Removes a spesified amount of messages"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Purge in Moderation"
+        )
+
         if not ctx.author.guild_permissions.manage_messages:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)
             return

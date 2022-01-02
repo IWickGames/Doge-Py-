@@ -2,6 +2,7 @@ import groups
 import config
 import discord
 import db.databace
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -25,6 +26,10 @@ class Pay(commands.Cog):
         )
     ):
         """Pay another user"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Pay in Economy"
+        )
 
         if amount == 0:
             await ctx.respond(

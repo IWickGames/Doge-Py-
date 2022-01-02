@@ -2,6 +2,7 @@ import groups
 import config
 import discord
 import db.databace
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -20,6 +21,10 @@ class Level(commands.Cog):
         )
     ):
         """Display your current message level and experience"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Level in Leveling"
+        )
 
         if user.bot:
             await ctx.respond(

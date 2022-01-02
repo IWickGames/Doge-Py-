@@ -2,6 +2,7 @@ import groups
 import config
 import db.sets
 import db.databace
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -31,6 +32,10 @@ class Set(commands.Cog):
         )
     ):
         """Configure User and Guild settings"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Set in Settings"
+        )
 
         match type:
             case "User":

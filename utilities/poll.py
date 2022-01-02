@@ -1,6 +1,7 @@
 import groups
 import config
 import discord
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -19,6 +20,11 @@ class Poll(commands.Cog):
         )
     ):
         """Create a simple thumbs up or down poll"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Poll in Utilities"
+        )
+
         emb = discord.Embed(
             title=message,
             color=config.embed_color,

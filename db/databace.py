@@ -3,6 +3,7 @@ import os
 import json
 import config
 import asyncio
+import log.logging
 
 global queue
 queue = {}
@@ -104,7 +105,6 @@ def Flush():
     /!\ THIS FUNCTION SHOULD ONLY BE CALLED BY THE databace_flush TASK /!\ 
     """
     global queue
-    print("[Databace] Starting flush operation...")
     with open(config.databace_file, "w") as f:
         f.write(json.dumps(queue, indent=4))
-    print("[Databace] Flush operation completed")
+    log.logging.Databace("Flush operation completed")

@@ -1,6 +1,7 @@
 import groups
 import config
 import discord
+import log.logging
 from db.databace import ReadKey
 from discord.ext import commands
 from discord.commands.commands import Option
@@ -20,6 +21,10 @@ class Punishments(commands.Cog):
         )
     ):
         """List a users past punishments"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Punishments in Moderation"
+        )
 
         if user.bot:
             await ctx.respond(config.bot_interaction_boterror, ephemeral=True)

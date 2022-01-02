@@ -1,6 +1,7 @@
 import config
 import groups
 import discord
+import log.logging
 from discord.ext import commands
 from discord.commands.commands import Option
 
@@ -19,6 +20,11 @@ class Star(commands.Cog):
         )
     ):
         """Add a message to the servers star board"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Star in Utilities"
+        )
+
         if not ctx.author.guild_permissions.manage_messages:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)
             return

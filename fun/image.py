@@ -2,6 +2,7 @@ import config
 import groups
 import random
 import discord
+import log.logging
 from typing import List
 from utility import GetImages
 from utility import Image as ResponceImages
@@ -15,6 +16,11 @@ class Image(commands.Cog):
     @groups.fun.command()
     async def image(ctx: commands.Context, query: str):
         """Lookup an image from the internet"""
+        await log.logging.Info(
+            f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
+            " executed Image in Fun"
+        )
+
         await ctx.respond(":satellite: Looking up images...")
 
         try:
