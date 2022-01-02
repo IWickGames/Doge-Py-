@@ -13,11 +13,7 @@ class OnJoin(commands.Cog):
         message = await db.databace.ReadKey(
             f"settings.{member.guild}.join_message"
         )
-        if not message:
-            message = ":inbox_tray: Welcome `{username}#"
-            "{discriminator} ({id})`, we are glad to have you!"
-
-        if message == "None":
+        if not message or message == "None":
             return
 
         try:

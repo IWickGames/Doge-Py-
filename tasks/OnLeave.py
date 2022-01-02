@@ -13,11 +13,7 @@ class OnLeave(commands.Cog):
         message = await db.databace.ReadKey(
             f"settings.{member.guild}.leave_message"
         )
-        if not message:
-            message = ":outbox_tray: Goodbye `{username}#"
-            "{discriminator} ({id})`"
-
-        if message == "None":
+        if not message or message == "None":
             return
 
         try:
