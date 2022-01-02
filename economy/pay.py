@@ -31,6 +31,13 @@ class Pay(commands.Cog):
             " executed Pay in Economy"
         )
 
+        if user.id == ctx.author.id:
+            await ctx.respond(
+                "You cannot pay yourself",
+                ephemeral=True
+            )
+            return
+
         if amount == 0:
             await ctx.respond(
                 "You cannot pay someone 0 funds",
