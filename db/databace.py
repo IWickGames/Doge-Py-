@@ -8,6 +8,8 @@ import log.logging
 global queue
 queue = {}
 
+updated = False
+
 
 async def WriteKey(key, value):
     """
@@ -22,6 +24,7 @@ async def WriteKey(key, value):
     """
     global queue
     queue[key] = value
+    updated = True
 
 
 async def AppendKey(key, value):
@@ -41,6 +44,7 @@ async def AppendKey(key, value):
         db = []
     db.append(value)
     await WriteKey(key, db)
+    updated = True
 
 
 async def ReadKey(key):
@@ -70,6 +74,7 @@ async def RemoveKey(key):
     global queue
     if key in queue.keys():
         queue.pop(key)
+    updated = True
 
 
 async def databace_flush():
@@ -81,7 +86,8 @@ async def databace_flush():
     Load()
     while True:
         await asyncio.sleep(30)
-        Flush()
+        if updated:
+            Flush()
 
 
 def Load():
