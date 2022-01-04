@@ -15,7 +15,7 @@ def MakeGroups(bot):
 
     moderation = bot.create_group(
         name="moderation",
-        description="Only autherised people here"
+        description="Only authorized people here"
     )
 
     utilities = bot.create_group(
