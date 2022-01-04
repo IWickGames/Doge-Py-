@@ -82,7 +82,7 @@ class Timeout(commands.Cog):
         )
 
         try:
-            await user.timeout(until=util, reason=reason)
+            await user.timeout_for(until=util, reason=reason)
         except discord.Forbidden:
             await ctx.respond(
                 config.bot_permission_boterrormsg,
