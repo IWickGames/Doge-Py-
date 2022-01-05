@@ -1,11 +1,20 @@
 # flake8: noqa: E501
+import os
+import sys
+import log.logging
 
 def PassBot(b):
     global bot
     bot = b
 
-
-token = open("token.env").read()
+if os.getenv("token"):
+    token = os.getenv("token")
+else:
+    try:
+        token = open("token.env").read()
+    except OSError:
+        log.logging.SyncError("Unable to locate token file or token environment entry")
+        sys.exit(1)
 
 test_servers = [735935481950503043, 673399675818213385]
 # test_servers = []
