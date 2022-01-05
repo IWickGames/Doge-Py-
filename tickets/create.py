@@ -6,6 +6,7 @@ import db.databace
 import log.logging
 from datetime import datetime
 from discord.ext import commands
+from tickets.views.closebtn import CloseBtn
 
 
 class Create(commands.Cog):
@@ -30,6 +31,8 @@ class Create(commands.Cog):
                 ephemeral=True
             )
             return
+
+        view = CloseBtn()
 
         overwrites = {
             ctx.author: discord.PermissionOverwrite(
@@ -66,7 +69,8 @@ class Create(commands.Cog):
         try:
             await channel.send(
                 content=f"{ctx.author.mention} your ticket has been created",
-                embed=emb
+                embed=emb,
+                view=view
             )
         except discord.Forbidden:
             await ctx.respond(

@@ -17,7 +17,7 @@ else:
         sys.exit(1)
 
 test_servers = [735935481950503043, 673399675818213385]
-# test_servers = []
+# test_servers = None
 databace_file = "db/bot.db"
 cog_directorys = [
     "tickets",

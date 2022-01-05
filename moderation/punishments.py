@@ -11,7 +11,7 @@ class Punishments(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.moderation.command()
+    @groups.moderation.command(guild_ids=config.test_servers)
     async def punishments(
         ctx: commands.Context,
         user: Option(

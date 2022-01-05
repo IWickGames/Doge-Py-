@@ -8,7 +8,7 @@ class Ping(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.tricks.command()
+    @groups.tricks.command(guild_ids=config.test_servers)
     async def ping(ctx: commands.Context):
         """Get bots latency to Discord API"""
         await log.logging.Info(

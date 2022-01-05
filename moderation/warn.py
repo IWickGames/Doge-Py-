@@ -13,7 +13,7 @@ class Warn(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.moderation.command()
+    @groups.moderation.command(guild_ids=config.test_servers)
     async def warn(
         ctx: commands.Context,
         user: Option(

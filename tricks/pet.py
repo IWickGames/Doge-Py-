@@ -1,4 +1,5 @@
 import groups
+import config
 import log.logging
 from discord.ext import commands
 
@@ -7,7 +8,7 @@ class Pet(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.tricks.command()
+    @groups.tricks.command(guild_ids=config.test_servers)
     async def pet(ctx: commands.Context):
         """Tell me I am doing a good job!"""
         await log.logging.Info(

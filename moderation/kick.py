@@ -13,7 +13,7 @@ class Kick(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.moderation.command()
+    @groups.moderation.command(guild_ids=config.test_servers)
     async def kick(
         ctx: commands.Context,
         user: Option(
