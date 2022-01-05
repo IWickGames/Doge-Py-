@@ -22,7 +22,38 @@
                 "panel": "shared",
                 "showReuseMessage": true,
                 "clear": true
+            }
+        },
+        {
+            "label": "Reset Databace",
+            "type": "shell",
+            "windows": {
+                "command": "del",
+                "args": [
+                    "/Q",
+                    "db/bot.db"
+                ]
             },
+            "linux": {
+                "command": "rm",
+                "args": [
+                    "db/bot.db"
+                ]
+            },
+            "group": "none",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true,
+                "close": true,
+                "revealProblems": "onProblem"
+            },
+            "problemMatcher": [
+                
+            ]
         }
     ]
 }
