@@ -1,11 +1,14 @@
 # flake8: noqa: E501
 import os
 import sys
+import discord
 import log.logging
 
-def PassBot(b):
+
+def PassBot(b: discord.Bot):
     global bot
     bot = b
+
 
 if os.getenv("token"):
     token = os.getenv("token")

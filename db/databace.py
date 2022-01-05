@@ -3,10 +3,11 @@ import os
 import json
 import config
 import asyncio
+import asyncfiles
 import log.logging
 
-global queue
-queue = {}
+global cache
+cache = {}
 
 global updated
 updated = False
@@ -23,9 +24,9 @@ async def WriteKey(key, value):
     Returns:
         None / Nothing
     """
-    global queue
+    global cache
     global updated
-    queue[key] = value
+    cache[key] = value
     updated = True
 
 
@@ -40,7 +41,6 @@ async def AppendKey(key, value):
     Returns:
         None / Nothing
     """
-    global queue
     global updated
     db = await ReadKey(key)
     if not db:
@@ -61,8 +61,14 @@ async def ReadKey(key):
         Anything or None / Nothing
         Will return None if the key does not exist
     """
-    global queue
-    return queue.get(key)
+    global cache
+    if cache.get(key):
+        return cache.get(key)
+    else:
+        j = await asyncfiles.read(config.databace_file)
+        if not j:
+            return None
+        return json.loads(j).get(key)
 
 async def RemoveKey(key):
     """
@@ -74,11 +80,21 @@ async def RemoveKey(key):
     Returns:
         None / Nothing
     """
-    global queue
+    global cache
     global updated
-    if key in queue.keys():
-        queue.pop(key)
-    updated = True
+    if key in cache.keys():
+        cache.pop(key)
+    
+    j = await asyncfiles.read(config.databace_file)
+    if not j:
+        return None
+    j = json.loads(j)
+    if key in j.keys():
+        j.pop(key)
+        await asyncfiles.write(
+            config.databace_file,
+            json.dumps(j).encode("utf-8")
+        )
 
 
 async def databace_flush():
@@ -87,36 +103,34 @@ async def databace_flush():
 
     /!\ IF YOU ARE CALLING THIS ANYWHERE YOU ARE USING IT WRONG /!\ 
     """
+    global cache
     global updated
-    Load()
     while True:
         await asyncio.sleep(30)
         if updated:
-            Flush()
-            updated = False
+            await Flush()
+            log.logging.Databace("Flushed databace successfully")
 
 
-def Load():
-    """
-    Loads the databace into the queue global
-    
-    This should only be run once
-    """
-    global queue
-    if os.path.exists(config.databace_file):
-        with open(config.databace_file, "r") as f:
-            queue = json.loads(f.read())
-    else:
-        queue = {}
+async def Flush():
+    global cache
+    global updated
 
+    if updated:
+        j = await asyncfiles.read(
+            config.databace_file
+        )
+        if j:
+            j = json.loads(j)
+            for key in cache.keys():
+                j[key] = cache[key]
+        else:
+            j = cache
 
-def Flush():
-    """
-    Flush operation aka Dumps the queue variable onto disk
-
-    /!\ THIS FUNCTION SHOULD ONLY BE CALLED BY THE databace_flush TASK /!\ 
-    """
-    global queue
-    with open(config.databace_file, "w") as f:
-        f.write(json.dumps(queue, indent=4))
-    log.logging.Databace("Flush operation completed")
+        await asyncfiles.write(
+            config.databace_file,
+            json.dumps(j).encode("utf-8")
+        )
+        cache = {}
+        updated = False
+        log.logging.Databace("Flushed databace successfully")

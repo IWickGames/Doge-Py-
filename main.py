@@ -38,10 +38,9 @@ try:
     bot.loop.create_task(db.databace.databace_flush())
     bot.loop.run_until_complete(bot.start(config.token, reconnect=True))
 except:  # noqa: E722
+    bot.loop.run_until_complete(db.databace.Flush())
     bot.loop.run_until_complete(bot.close())
 finally:
-    db.databace.Flush()
-
     if os.path.exists("__pycache__"):
         print("Cleaning up...")
         shutil.rmtree("__pycache__")
