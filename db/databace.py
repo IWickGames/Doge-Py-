@@ -3,8 +3,8 @@ import os
 import json
 import config
 import asyncio
-import asyncfiles
 import log.logging
+import db.asyncfiles as asyncfiles
 
 global cache
 cache = {}
