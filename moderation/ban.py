@@ -3,6 +3,7 @@ import groups
 import discord
 import db.databace
 import log.logging
+from datetime import datetime
 from discord.ext import commands
 from utility import CheckHigharchy
 from discord.commands.commands import Option
@@ -42,7 +43,8 @@ class Ban(commands.Cog):
             {
                 "type": "Ban",
                 "reason": reason,
-                "issuer": f"{ctx.author.name}#{ctx.author.discriminator}"
+                "issuer": f"{ctx.author.name}#{ctx.author.discriminator}",
+                "timestamp": str(datetime.utcnow())
             }
         )
 

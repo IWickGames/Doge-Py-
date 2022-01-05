@@ -75,7 +75,8 @@ class Timeout(commands.Cog):
             {
                 "type": "Timeout",
                 "reason": reason,
-                "issuer": f"{ctx.author.name}#{ctx.author.discriminator}"
+                "issuer": f"{ctx.author.name}#{ctx.author.discriminator}",
+                "timestamp": str(datetime.datetime.utcnow())
             }
         )
 

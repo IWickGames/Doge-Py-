@@ -41,10 +41,11 @@ class Punishments(commands.Cog):
         emb = discord.Embed(
             title=f"{user.name}#{user.discriminator} Punishment History",
             description="\n".join(
-                ["`{}` (`{}`) `{}`".format(
+                ["`{}` (`{}`) `{}` | Issued `{}`".format(
                     value["type"],
                     value["issuer"],
-                    value["reason"]) for value in db]
+                    value["reason"],
+                    value["timestamp"]) for value in db]
             ),
             color=config.embed_color
         )
