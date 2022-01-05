@@ -197,8 +197,13 @@ async def HelpSettings():
         color=config.embed_color
     )
     emb.add_field(
-        name="set",
+        name="set {type:Choice} {setting:String} {value:String}",
         value="Set a configuration value for both user and guild",
+        inline=True
+    )
+    emb.add_field(
+        name="view {type:Choice} {setting:String}",
+        value="View a configuration value for both user and guild",
         inline=True
     )
     emb.add_field(
