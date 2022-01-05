@@ -4,7 +4,7 @@ import db.sets
 import discord
 import log.logging
 from discord.ext import commands
-from discord.commands.commands import Option
+from tricks.views.helpdropdown import HelpDropDown
 
 
 async def HelpTrics():
@@ -224,18 +224,12 @@ async def HelpTickets():
         value="Creates a new ticket",
         inline=True
     )
-    emb.add_field(
-        name="close",
-        value="Closes a ticket channel when executed",
-        inline=True
-    )
     return emb
 
 
 async def HelpEconomy():
     emb = discord.Embed(
         title="Economy",
-        description="Show me the moneeeeeeeeeeey",
         color=config.embed_color
     )
     emb.add_field(
@@ -260,93 +254,28 @@ class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.tricks.command()
-    async def help(
-        ctx: commands.Context,
-        category: Option(
-            str,
-            description="Select a category to get help on",  # noqa: F722
-            choices=[
-                "fun",          # noqa: F821
-                "leveling",     # noqa: F821
-                "economy",      # noqa: F821
-                "moderation",   # noqa: F821
-                "settings",     # noqa: F821
-                "tasks",        # noqa: F821
-                "tricks",       # noqa: F821
-                "utilities",    # noqa: F821
-            ],
-            default=""  # noqa: F722
-        )
-    ):
-        """Display a help message"""
+    @groups.tricks.command(guild_ids=config.test_servers)
+    async def help(ctx: commands.Context):
+        """Display bot help"""
         await log.logging.Info(
             f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
             " executed Help in Tricks"
         )
 
-        match category:
-            case "tricks":
-                await ctx.respond(embed=await HelpTrics())
-                return
-
-            case "tasks":
-                await ctx.respond(embed=await HelpTasks())
-                return
-
-            case "moderation":
-                await ctx.respond(embed=await HelpModeration())
-                return
-
-            case "utilities":
-                await ctx.respond(embed=await HelpUtilities())
-                return
-
-            case "fun":
-                await ctx.respond(embed=await HelpFun())
-                return
-
-            case "leveling":
-                await ctx.respond(embed=await HelpLeveling())
-                return
-
-            case "settings":
-                await ctx.respond(embed=await HelpSettings())
-                return
-
-            case "tickets":
-                await ctx.respond(embed=await HelpTickets())
-                return
-
-            case "economy":
-                await ctx.respond(embed=await HelpEconomy())
-                return
-
-            case "":
-                pass
-
-            case _:
-                await ctx.respond(
-                    f":anger: Grrrr, invalid category `{category}`",
-                    ephemeral=True
-                )
-                return
-
-        hEmb = discord.Embed(
+        emb = discord.Embed(
             title=f"Hello {ctx.author.name} :wave:",
             color=config.embed_color,
             description=":guide_dog: I am your friendly Discord server "
             f"doge to help you out on `{ctx.guild.name}` :smiley:\n"
             + "( I also like being pet :wink: )\n\n"
 
-            + ":mega: Wolf! Here are the different "
-            "catigories of things I can do,\n"
-            + "`tricks`, `tasks`, `moderation`, `utilities`, `fun`\n\n"
-            + "You can select one by doing `/help catigoryName`\n"
-            + "Example: `/help tricks`"
+            + ":mega: Wolf! Select the dropdown below to view my features"
         )
-        hEmb.set_footer(text="Created with ❤️ by IWick Development")
-        await ctx.respond(embed=hEmb)
+        emb.set_footer(text="Created with ❤️ by IWick Development")
+
+        view = discord.ui.View(timeout=60*5)
+        view.add_item(HelpDropDown(ctx.author))
+        await ctx.respond(embed=emb, view=view)
 
 
 def setup(bot):

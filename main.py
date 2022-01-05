@@ -47,5 +47,7 @@ finally:
         shutil.rmtree("__pycache__")
         for folder in config.cog_directorys:
             shutil.rmtree(folder + "/__pycache__")
+            if os.path.exists(folder + "/views/__pycache__"):
+                shutil.rmtree(folder + "/views/__pycache__")
         shutil.rmtree("db/__pycache__")
         shutil.rmtree("log/__pycache__")

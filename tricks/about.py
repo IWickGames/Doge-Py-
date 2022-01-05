@@ -3,13 +3,14 @@ import config
 import discord
 import log.logging
 from discord.ext import commands
+from tricks.views.aboutbtn import AboutBtn
 
 
 class About(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.tricks.command()
+    @groups.tricks.command(guild_ids=config.test_servers)
     async def about(ctx: commands.Context):
         """Display information about this bot"""
         await log.logging.Info(
@@ -33,17 +34,7 @@ class About(commands.Cog):
         )
         emb.set_thumbnail(url=config.bot.user.avatar.url)
 
-        emb.add_field(
-            name="Add Me!",
-            value="[Click here to add me to your server](https://discord.com/api/oauth2/authorize?client_id=869706426975670312&permissions=8&scope=applications.commands%20bot)",  # noqa: E501
-            inline=True
-        )
-        emb.add_field(
-            name="GitHub",
-            value="[Click here for my GitHub page](https://github.com/IWickGames/Doge-Py-)",  # noqa: E501
-            inline=True
-        )
-        await ctx.respond(embed=emb)
+        await ctx.respond(embed=emb, view=AboutBtn())
 
 
 def setup(bot):

@@ -3,6 +3,7 @@ import config
 import discord
 import db.databace
 import log.logging
+from datetime import datetime
 from discord.ext import commands
 from utility import CheckHigharchy
 from discord.commands.commands import Option
@@ -12,7 +13,7 @@ class Warn(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.moderation.command()
+    @groups.moderation.command(guild_ids=config.test_servers)
     async def warn(
         ctx: commands.Context,
         user: Option(
@@ -57,7 +58,8 @@ class Warn(commands.Cog):
             {
                 "type": "Warning",
                 "reason": reason,
-                "issuer": f"{ctx.author.name}#{ctx.author.discriminator}"
+                "issuer": f"{ctx.author.name}#{ctx.author.discriminator}",
+                "timestamp": str(datetime.utcnow())
             }
         )
 

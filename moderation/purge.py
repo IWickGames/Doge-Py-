@@ -12,7 +12,7 @@ class Purge(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.moderation.command()
+    @groups.moderation.command(guild_ids=config.test_servers)
     async def purge(
         ctx: commands.Context,
         amount: Option(

@@ -10,7 +10,7 @@ class Meme(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.fun.command()
+    @groups.fun.command(guild_ids=config.test_servers)
     async def meme(ctx: commands.Context):
         """Get an extra dank meme from the interwebs"""
         await log.logging.Info(

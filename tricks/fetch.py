@@ -1,4 +1,5 @@
 import groups
+import config
 import log.logging
 from discord.ext import commands
 
@@ -7,7 +8,7 @@ class Fetch(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.tricks.command()
+    @groups.tricks.command(guild_ids=config.test_servers)
     async def fetch(ctx: commands.Context):
         """Let me fetch a bone for you"""
         await log.logging.Info(

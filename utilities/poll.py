@@ -10,7 +10,7 @@ class Poll(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.utilities.command()
+    @groups.utilities.command(guild_ids=config.test_servers)
     async def poll(
         ctx: commands.Context,
         message: Option(

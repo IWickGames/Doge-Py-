@@ -11,7 +11,7 @@ class Level(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.leveling.command()
+    @groups.leveling.command(guild_ids=config.test_servers)
     async def level(
         ctx: commands.Context,
         user: Option(

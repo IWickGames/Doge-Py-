@@ -13,7 +13,7 @@ class Timeout(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.moderation.command()
+    @groups.moderation.command(guild_ids=config.test_servers)
     async def timeout(
         ctx: commands.Context,
         user: Option(
@@ -54,35 +54,34 @@ class Timeout(commands.Cog):
             )
             return
 
-        now = datetime.datetime.now()
-
         match time:
             case "1 Minute":
-                util = now + datetime.timedelta(seconds=60)
+                util = datetime.timedelta(seconds=60)
             case "5 Minutes":
-                util = now + datetime.timedelta(minutes=5)
+                util = datetime.timedelta(minutes=5)
             case "10 Minutes":
-                util = now + datetime.timedelta(minutes=10)
+                util = datetime.timedelta(minutes=10)
             case "1 Hour":
-                util = now + datetime.timedelta(hours=1)
+                util = datetime.timedelta(hours=1)
             case "1 Day":
-                util = now + datetime.timedelta(days=1)
+                util = datetime.timedelta(days=1)
             case "1 Week":
-                util = now + datetime.timedelta(weeks=1)
+                util = datetime.timedelta(weeks=1)
             case _:
-                util = now + datetime.timedelta(minutes=5)
+                util = datetime.timedelta(minutes=5)
 
         await db.databace.AppendKey(
             f"punishments.{user.id}.{ctx.guild.id}",
             {
                 "type": "Timeout",
                 "reason": reason,
-                "issuer": f"{ctx.author.name}#{ctx.author.discriminator}"
+                "issuer": f"{ctx.author.name}#{ctx.author.discriminator}",
+                "timestamp": str(datetime.datetime.utcnow())
             }
         )
 
         try:
-            await user.timeout_for(until=util, reason=reason)
+            await user.timeout_for(duration=util, reason=reason)
         except discord.Forbidden:
             await ctx.respond(
                 config.bot_permission_boterrormsg,
@@ -92,7 +91,7 @@ class Timeout(commands.Cog):
 
         await ctx.respond(
             f":white_check_mark: The user `{user.name}#{user.discriminator}` "
-            f"was successfully timeouted until {discord.utils.format_dt(util)}"
+            f"was successfully timeouted for {time}"
         )
 
 

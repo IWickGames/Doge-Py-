@@ -11,7 +11,7 @@ class View(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.settings.command()
+    @groups.settings.command(guild_ids=config.test_servers)
     async def view(
         ctx: commands.Context,
         type: Option(

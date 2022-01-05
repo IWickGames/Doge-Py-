@@ -11,7 +11,7 @@ class Pay(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.economy.command()
+    @groups.economy.command(guild_ids=config.test_servers)
     async def pay(
         ctx: commands.Context,
         user: Option(
