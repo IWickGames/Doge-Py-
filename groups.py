@@ -7,6 +7,7 @@ def MakeGroups(bot):
     global settings
     global tickets
     global economy
+    global owner
 
     tricks = bot.create_group(
         name="tricks",
@@ -47,4 +48,9 @@ def MakeGroups(bot):
     economy = bot.create_group(
         name="economy",
         description="Show me the moneeeeeeeey"
+    )
+
+    owner = bot.create_group(
+        name="owner",
+        description="Bot owner commands"
     )

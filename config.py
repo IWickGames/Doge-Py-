@@ -19,6 +19,8 @@ else:
         log.logging.SyncError("Unable to locate token file or token environment entry")
         sys.exit(1)
 
+authorized_users = [320699339645124608]
+
 test_servers = [735935481950503043, 673399675818213385]
 # test_servers = None
 databace_file = "db/bot.db"
@@ -31,7 +33,8 @@ cog_directorys = [
     "moderation",
     "utilities",
     "leveling",
-    "economy"
+    "economy",
+    "owner"
 ]
 embed_color = int("fcd111", 16)
 meme_api = "https://meme-api.herokuapp.com/gimme"
