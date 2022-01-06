@@ -17,19 +17,19 @@ async def ScaleBytes(bytes, suffix="B"):
 class Stats(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    
-    @groups.owner.command(
-        guild_ids=config.test_servers
-    )
+
+    @groups.owner.command(guild_ids=config.test_servers)
     async def stats(ctx: commands.Context):
         """Display system and usage information"""
         if ctx.author.id not in config.authorized_users:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)
             return
-        
+
         emb = discord.Embed(
-            title=f"Bot Statistics ({config.bot.user.name}#{config.bot.user.discriminator})",
-            description=f"Running `{len(config.bot.cogs)}` cogs in `{len(config.bot.guilds)}` guilds",
+            title=f"Bot Statistics "
+            f"({config.bot.user.name}#{config.bot.user.discriminator})",
+            description=f"Running `{len(config.bot.cogs)}` "
+            f"cogs in `{len(config.bot.guilds)}` guilds",
             color=config.embed_color
         )
 
@@ -55,9 +55,11 @@ class Stats(commands.Cog):
             value=f"""Total: {await ScaleBytes(svem.total)}"""
             + f"""\nUsed: {await ScaleBytes(svem.used)} / {svem.percent}%"""
             + f"""\nSwap: {await ScaleBytes(swap.total)}"""
-            + f"""\nSwap Used: {await ScaleBytes(swap.used)} / {swap.percent}%"""
+            + f"""\nSwap Used: {await ScaleBytes(swap.used)} """
+            f"""/ {swap.percent}%"""
         )
         await ctx.respond(embed=emb, ephemeral=True)
+
 
 def setup(bot):
     bot.add_cog(Stats(bot))

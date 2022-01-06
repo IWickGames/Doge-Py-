@@ -14,15 +14,15 @@ class Guilds(commands.Cog):
         if ctx.author.id not in config.authorized_users:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)
             return
-            
+
         lines = [f"""{g.name} ({g.id})\n""" for g in config.bot.guilds]
-        
+
         emb = discord.Embed(
             title="Joined guilds",
             description=lines,
             color=config.embed_color
         )
-        ctx.respond(embed=emb, ephemeral=True)
+        await ctx.respond(embed=emb, ephemeral=True)
 
 
 def setup(bot):
