@@ -93,7 +93,7 @@ async def RemoveKey(key):
         j.pop(key)
         await asyncfiles.write(
             config.databace_file,
-            json.dumps(j).encode("utf-8")
+            json.dumps(j, indent=4).encode("utf-8")
         )
 
 
@@ -129,7 +129,7 @@ async def Flush():
 
         await asyncfiles.write(
             config.databace_file,
-            json.dumps(j).encode("utf-8")
+            json.dumps(j, indent=4).encode("utf-8")
         )
         cache = {}
         updated = False
