@@ -4,12 +4,12 @@ import discord
 from discord.ext import commands
 
 
-class Guilds(commands.Cog):
+class Servers(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @groups.owner.command(guild_ids=config.test_servers)
-    async def guilds(ctx: commands.Context):
+    async def servers(ctx: commands.Context):
         """List the bots guilds"""
         if ctx.author.id not in config.authorized_users:
             await ctx.respond(config.bot_permission_errormsg, ephemeral=True)
@@ -26,4 +26,4 @@ class Guilds(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Guilds(bot))
+    bot.add_cog(Servers(bot))
