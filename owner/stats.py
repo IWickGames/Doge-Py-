@@ -18,7 +18,7 @@ class Stats(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.owner.command(guild_ids=config.test_servers)
+    @groups.owner.command()
     async def stats(ctx: commands.Context):
         """Display system and usage information"""
         if ctx.author.id not in config.authorized_users:

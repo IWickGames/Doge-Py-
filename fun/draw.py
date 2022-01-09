@@ -11,7 +11,7 @@ class Draw(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.fun.command(guild_ids=config.test_servers)
+    @groups.fun.command()
     async def draw(
         ctx: commands.Context,
         code: Option(

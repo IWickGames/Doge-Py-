@@ -10,7 +10,7 @@ class About(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.tricks.command(guild_ids=config.test_servers)
+    @groups.tricks.command()
     async def about(ctx: commands.Context):
         """Display information about this bot"""
         await log.logging.Info(

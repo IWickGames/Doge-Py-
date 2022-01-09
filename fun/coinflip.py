@@ -1,5 +1,4 @@
 import groups
-import config
 import random
 import log.logging
 from discord.ext import commands
@@ -9,7 +8,7 @@ class Coinflip(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.fun.command(guild_ids=config.test_servers)
+    @groups.fun.command()
     async def coinflip(ctx: commands.Context):
         """Flip a coin"""
         await log.logging.Info(

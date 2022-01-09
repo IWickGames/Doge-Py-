@@ -9,7 +9,7 @@ class Afk(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.utilities.command(guild_ids=config.test_servers)
+    @groups.utilities.command()
     async def afk(ctx: commands.Context):
         """Toggle your AFK status"""
         await log.logging.Info(

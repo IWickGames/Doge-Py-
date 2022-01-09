@@ -13,7 +13,7 @@ class Ban(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.moderation.command(guild_ids=config.test_servers)
+    @groups.moderation.command()
     async def ban(
         ctx: commands.Context,
         user: Option(

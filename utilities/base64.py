@@ -1,5 +1,4 @@
 import groups
-import config
 import base64
 import binascii
 import log.logging
@@ -11,7 +10,7 @@ class Base64(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.utilities.command(guild_ids=config.test_servers)
+    @groups.utilities.command()
     async def base64(
         ctx: commands.Context,
         operation: Option(
