@@ -24,7 +24,7 @@ else:
 
 authorized_users = [320699339645124608]
 
-test_servers = [735935481950503043, 673399675818213385]
+test_servers = [735935481950503043, 673399675818213385, 717736350727798785]
 # test_servers = None
 databace_file = "db/bot.db"
 cog_directorys = [
