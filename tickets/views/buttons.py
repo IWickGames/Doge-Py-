@@ -6,8 +6,9 @@ class CloseBtn(discord.ui.View):
         super().__init__()
 
     @discord.ui.button(
-        label="🔒 Close Ticket",
-        style=discord.ButtonStyle.red
+        label="Close Ticket",
+        style=discord.ButtonStyle.red,
+        emoji="🔒"
     )
     async def close(
         self, button: discord.ui.Button, interaction: discord.Interaction
@@ -40,8 +41,9 @@ class ReopenBtn(discord.ui.View):
         super().__init__()
 
     @discord.ui.button(
-        label="🔓 Reopen Ticket",
-        style=discord.ButtonStyle.green
+        label="Reopen Ticket",
+        style=discord.ButtonStyle.green,
+        emoji="🔓"
     )
     async def close(
         self, button: discord.ui.Button, interaction: discord.Interaction
