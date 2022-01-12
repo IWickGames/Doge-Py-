@@ -1,4 +1,5 @@
 # flake8: noqa: E501
+import re
 import discord
 import aiohttp
 from typing import List
@@ -15,7 +16,7 @@ class Image:
         self.url = jdata["url"]
 
 
-async def CheckHigharchy(target: discord.User, author: discord.User):
+async def CheckHigharchy(target: discord.User, author: discord.User) -> bool:
     """Returns True if the target has a higher role than the author else false"""
     return target.top_role >= author.top_role
 
@@ -47,7 +48,7 @@ async def GetImages(search) -> List[Image]:
     return images
 
 
-async def EncodeDrawCode(codeRaw):
+async def EncodeDrawCode(codeRaw) -> str | None:
     length, width = codeRaw.split(":", 1)[0].lower().split("x")
     code = codeRaw.split(":", 1)[1]
 
@@ -77,10 +78,38 @@ async def EncodeDrawCode(codeRaw):
 
     return message
 
-async def InputMessageArguments(member: discord.Member, message: str):
+async def InputMessageArguments(member: discord.Member, message: str) -> str:
     message = message.replace("{username}", member.name)
     message = message.replace("{discriminator}", member.discriminator)
     message = message.replace("{id}", member.id)
     message = message.replace("{mention}", member.mention)
     message = message.replace("{created}", discord.utils.format_dt(member.created_at))
     return message
+
+
+async def GetMessageUrls(message: str) -> List[str]:
+    matches = re.findall(
+        r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+",
+        message
+    )
+    return matches
+
+
+async def ScanUrl(url: str) -> int:
+    """
+    Scans a url and returns the status code of the scan
+
+    0 = Safe
+    1 = Warning
+    2 = Danger
+    """
+    async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) as s:
+        req = await s.get(url, allow_redirects=True)
+        data = await req.text()
+        data = data.lower()
+
+        # Discord nitro scam
+        if "free" in data and "discord" in data and "nitro" in data:
+            return 2
+        
+        return 0

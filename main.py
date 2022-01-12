@@ -12,6 +12,7 @@ path.append(os.path.realpath("."))
 
 ints = discord.Intents.default()
 ints.members = True
+ints.messages = True
 bot = discord.Bot(
     intents=ints,
     debug_guilds=config.test_servers
