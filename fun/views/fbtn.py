@@ -4,7 +4,7 @@ import discord
 class FButtons(discord.ui.View):
     def __init__(self):
         super().__init__(
-            timeout=432000
+            timeout=60*2
         )
 
     @discord.ui.button(
