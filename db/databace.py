@@ -15,11 +15,11 @@ updated = False
 async def WriteKey(key, value):
     """
     Writes a key and value to the databace (can also replace or overwrite an existing value)
-    
+
     Arguments:
         key: The access key value to use
         value: The value of the access key stored
-    
+
     Returns:
         None / Nothing
     """
@@ -69,13 +69,14 @@ async def ReadKey(key):
             return None
         return json.loads(j).get(key)
 
+
 async def RemoveKey(key):
     """
     Deletes a key from the databace
 
     Arguments:
         key: The access key to delete
-    
+
     Returns:
         None / Nothing
     """
@@ -83,7 +84,7 @@ async def RemoveKey(key):
     global updated
     if key in cache.keys():
         cache.pop(key)
-    
+
     j = await asyncfiles.read(config.databace_file)
     if not j:
         return None
