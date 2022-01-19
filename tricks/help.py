@@ -259,7 +259,7 @@ class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.tricks.command(guild_ids=config.test_servers)
+    @groups.tricks.command()
     async def help(ctx: commands.Context):
         """Display bot help"""
         await log.logging.Info(

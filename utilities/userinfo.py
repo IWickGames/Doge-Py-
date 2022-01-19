@@ -10,7 +10,7 @@ class Userinfo(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.utilities.command(guild_ids=config.test_servers)
+    @groups.utilities.command()
     async def userinfo(
         ctx: commands.Context,
         user: Option(

@@ -10,7 +10,13 @@ print("==== Starting bot initialization... ====")
 
 path.append(os.path.realpath("."))
 
-bot = discord.Bot()
+ints = discord.Intents.default()
+ints.members = True
+ints.messages = True
+bot = discord.Bot(
+    intents=ints,
+    debug_guilds=config.test_servers
+)
 
 config.PassBot(bot)
 groups.MakeGroups(bot)

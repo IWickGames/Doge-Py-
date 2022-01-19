@@ -1,5 +1,4 @@
 import groups
-import config
 import db.databace
 import log.logging
 from discord.ext import commands
@@ -10,7 +9,7 @@ class Credit(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.economy.command(guild_ids=config.test_servers)
+    @groups.economy.command()
     async def credit(
         ctx: commands.Context,
         amount: Option(

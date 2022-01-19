@@ -11,7 +11,7 @@ class Set(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @groups.settings.command(guild_ids=config.test_servers)
+    @groups.settings.command()
     async def set(
         ctx: commands.Context,
         type: Option(

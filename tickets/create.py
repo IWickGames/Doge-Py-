@@ -6,7 +6,7 @@ import db.databace
 import log.logging
 from datetime import datetime
 from discord.ext import commands
-from tickets.views.closebtn import CloseBtn
+from tickets.views.buttons import CloseBtn
 
 
 class Create(commands.Cog):

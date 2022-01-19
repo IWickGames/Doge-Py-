@@ -1,4 +1,6 @@
+import config
 import discord
+import utility
 import db.databace
 from discord.ext import commands
 
@@ -30,6 +32,46 @@ class OnMessage(commands.Cog):
                 f"level `{int((value+1)/100)}` with `{value+1}` "
                 "total experience"
             )
+
+        urls = await utility.GetMessageUrls(
+            message.content
+        )
+        if len(urls) != 0:
+            await message.add_reaction("🔗")
+            for url in urls:
+                status = await utility.ScanUrl(url)
+
+                match status:
+                    case 0:
+                        await message.add_reaction("🟩")
+                    case 1:
+                        await message.add_reaction("🟨")
+                    case 2:
+                        await message.add_reaction("🟥")
+
+                        emb = discord.Embed(
+                            title="Potentially dangerous content",
+                            description="This message has been flaged to "
+                            "contain links to potentially malishous "
+                            "or phishing content. Proceed with caution.",
+                            color=config.embed_color
+                        )
+                        emb.add_field(
+                            name="Url",
+                            value=f"`{url}`"
+                        )
+                        emb.add_field(
+                            name="Author",
+                            value=f"{message.author.mention} "
+                            f"{message.author.name}#"
+                            f"{message.author.discriminator} "
+                            f"({message.author.id})"
+                        )
+                        emb.set_thumbnail(
+                            url="https://image.flaticon.com/icons/"
+                            "png/512/868/868647.png"
+                        )
+                        await message.reply(embed=emb)
 
 
 def setup(bot):
