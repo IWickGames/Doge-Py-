@@ -19,7 +19,6 @@ bot = discord.Bot(
 )
 
 config.PassBot(bot)
-groups.MakeGroups(bot)
 
 maxlength = len(
     max(
