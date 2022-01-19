@@ -2,7 +2,7 @@
 import re
 import discord
 import aiohttp
-from typing import List
+from typing import List, Tuple
 
 
 class Image:
@@ -95,21 +95,35 @@ async def GetMessageUrls(message: str) -> List[str]:
     return matches
 
 
-async def ScanUrl(url: str) -> int:
+async def ScanUrl(url: str) -> Tuple[int, str]:
     """
-    Scans a url and returns the status code of the scan
+    Does a saftey check on a given url
 
     0 = Safe
     1 = Warning
     2 = Danger
+
+    Returns:
+        Status Code - int
+        Reason (Check) - str
     """
+    if url.lower().endswith(".exe") or url.lower().endswith(".py"):
+        return 2, "File - Executable file"
+
     async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) as s:
         req = await s.get(url, allow_redirects=True)
-        data = await req.text()
+        try:
+            data = await req.text()
+        except UnicodeDecodeError:
+            return 1, "Content is not parciable (could be a file such as a PDF)"
         data = data.lower()
 
-        # Discord nitro scam
+        # Potential Discord Nitro scam check
         if "free" in data and "discord" in data and "nitro" in data:
-            return 2
+            return 2, "Advert - Free Nitro (Potential Scam)"
         
-        return 0
+        # Cash App Hack scam check
+        if "cash" in data and "app" in data and "hack" in data:
+            return 2, "Advert - Cash App Hack scam"
+        
+        return 0, ""

@@ -39,7 +39,7 @@ class OnMessage(commands.Cog):
         if len(urls) != 0:
             await message.add_reaction("🔗")
             for url in urls:
-                status = await utility.ScanUrl(url)
+                status, reason = await utility.ScanUrl(url)
 
                 match status:
                     case 0:
@@ -53,12 +53,18 @@ class OnMessage(commands.Cog):
                             title="Potentially dangerous content",
                             description="This message has been flaged to "
                             "contain links to potentially malishous "
-                            "or phishing content. Proceed with caution.",
+                            "or phishing content. Proceed with caution. "
+                            "\n`Do not enter any personal or login information into "
+                            "any website you don't trust.`",
                             color=config.embed_color
                         )
                         emb.add_field(
                             name="Url",
                             value=f"`{url}`"
+                        )
+                        emb.add_field(
+                            name="Check",
+                            value=reason
                         )
                         emb.add_field(
                             name="Author",

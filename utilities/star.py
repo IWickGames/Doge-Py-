@@ -20,6 +20,8 @@ class Star(commands.Cog):
         )
     ):
         """Add a message to the servers star board"""
+        await ctx.defer()
+        
         await log.logging.Info(
             f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
             " executed Star in Utilities"
