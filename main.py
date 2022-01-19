@@ -1,6 +1,5 @@
 import os
 import shutil
-import groups
 import config
 import discord
 import db.databace
