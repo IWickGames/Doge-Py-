@@ -2,6 +2,7 @@
 import re
 import discord
 import aiohttp
+from log import logging
 from typing import List, Tuple
 
 
@@ -107,23 +108,33 @@ async def ScanUrl(url: str) -> Tuple[int, str]:
         Status Code - int
         Reason (Check) - str
     """
+    headers = {"User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14324.62.0) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/97.0.4692.77 Safari/537.36"}
+
     if url.lower().endswith(".exe") or url.lower().endswith(".py"):
         return 2, "File - Executable file"
 
     async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) as s:
-        req = await s.get(url, allow_redirects=True)
         try:
+            req = await s.get(url, allow_redirects=True, headers=headers)
             data = await req.text()
         except UnicodeDecodeError:
+            await logging.Error("Failed to parce scanned: " + url)
             return 1, "Content is not parciable (could be a file such as a PDF)"
+        except aiohttp.ClientConnectorError:
+            await logging.Error("Scan connection failed: "+ url)
+            return 1, "Failed to resolve website"
         data = data.lower()
 
         # Potential Discord Nitro scam check
         if "free" in data and "discord" in data and "nitro" in data:
-            return 2, "Advert - Free Nitro (Potential Scam)"
+            if "worth it" in data or "don't fall for" in data:
+                pass
+            else:
+                return 2, "Advert - Free Nitro (Potential Scam)"
         
         # Cash App Hack scam check
         if "cash" in data and "app" in data and "hack" in data:
             return 2, "Advert - Cash App Hack scam"
         
-        return 0, ""
+        return 0, "No issues found"
