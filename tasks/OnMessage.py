@@ -52,9 +52,10 @@ class OnMessage(commands.Cog):
                         emb = discord.Embed(
                             title="Potentially dangerous content",
                             description="This message has been flaged to "
-                            "contain links to potentially malishous "
+                            "contain links to potentially malicious "
                             "or phishing content. Proceed with caution. "
-                            "\n`Do not enter any personal or login information into "
+                            "\n`Do not enter any personal or login "
+                            "information into "
                             "any website you don't trust.`",
                             color=config.embed_color
                         )
