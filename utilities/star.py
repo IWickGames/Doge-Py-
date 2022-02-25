@@ -2,8 +2,8 @@ import config
 import groups
 import discord
 import log.logging
+from discord import Option
 from discord.ext import commands
-from discord.commands.commands import Option
 
 
 class Star(commands.Cog):
@@ -21,7 +21,7 @@ class Star(commands.Cog):
     ):
         """Add a message to the servers star board"""
         await ctx.defer()
-        
+
         await log.logging.Info(
             f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})"
             " executed Star in Utilities"

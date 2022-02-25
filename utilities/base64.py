@@ -2,8 +2,8 @@ import groups
 import base64
 import binascii
 import log.logging
+from discord import Option
 from discord.ext import commands
-from discord.commands.commands import Option
 
 
 class Base64(commands.Cog):

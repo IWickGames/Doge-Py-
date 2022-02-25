@@ -2,9 +2,9 @@ import groups
 import config
 import discord
 import log.logging
+from discord import Option
 from db.databace import ReadKey
 from discord.ext import commands
-from discord.commands.commands import Option
 
 
 class Punishments(commands.Cog):

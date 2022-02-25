@@ -4,8 +4,8 @@ import discord
 import asyncio
 import log.logging
 from typing import List
+from discord import Option
 from discord.ext import commands
-from discord.commands.commands import Option
 
 
 class Purge(commands.Cog):

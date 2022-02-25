@@ -2,8 +2,8 @@ import groups
 import config
 import db.databace
 import log.logging
+from discord import Option
 from discord.ext import commands
-from discord.commands.commands import Option
 
 
 class Disable(commands.Cog):

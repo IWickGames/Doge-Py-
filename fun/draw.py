@@ -2,9 +2,9 @@ import groups
 import config
 import discord
 import log.logging
+from discord import Option
 from discord.ext import commands
 from utility import EncodeDrawCode
-from discord.commands.commands import Option
 
 
 class Draw(commands.Cog):

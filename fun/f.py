@@ -1,7 +1,7 @@
 import groups
+from discord import Option
 from discord.ext import commands
 from fun.views.fbtn import FButtons
-from discord.commands.commands import Option
 
 
 class F(commands.Cog):

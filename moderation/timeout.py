@@ -4,9 +4,9 @@ import discord
 import datetime
 import db.databace
 import log.logging
+from discord import Option
 from discord.ext import commands
 from utility import CheckHigharchy
-from discord.commands.commands import Option
 
 
 class Timeout(commands.Cog):
