@@ -51,7 +51,7 @@ async def AppendKey(key, value):
 
 async def ReadKey(key):
     """
-    Reads a key value from the databace file and retuns it
+    Reads a key value from the databace file and returns it
 
     Arguments:
         key: The access key to read
